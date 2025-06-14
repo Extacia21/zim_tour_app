@@ -15,6 +15,8 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
+import EnhancedNavigation from '@/components/EnhancedNavigation';
+import EnhancedFooter from '@/components/EnhancedFooter';
 import HotelDiscoverySystem from '@/components/HotelDiscoverySystem';
 import ActivitiesDatabase from '@/components/ActivitiesDatabase';
 import WildlifeSpotlight from '@/components/WildlifeSpotlight';
@@ -30,7 +32,7 @@ const destinations = {
     usp: 'Largest waterfall by volume in the world',
     bestSeason: 'Peak flow: March - May',
     temperature: '25-30°C',
-    description: 'Experience the raw power of one of the Seven Natural Wonders of the World',
+    description: 'Experience the raw power of one of the Seven Natural Wonders of the World. Victoria Falls is a spectacular sight of awe-inspiring beauty and grandeur on the Zambezi River, forming the border between Zambia and Zimbabwe.',
     gallery: [
       'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
@@ -49,7 +51,7 @@ const destinations = {
     usp: 'Home to 40,000+ elephants',
     bestSeason: 'Dry season: May - October',
     temperature: '20-35°C',
-    description: 'Zimbabwe\'s largest national park with diverse wildlife',
+    description: 'Zimbabwe\'s largest national park with diverse wildlife including the largest elephant population in Africa. Experience incredible game viewing and pristine wilderness.',
     gallery: [
       'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
@@ -68,7 +70,7 @@ const destinations = {
     usp: 'Largest concentration of rock art in Southern Africa',
     bestSeason: 'Cool season: April - August',
     temperature: '15-25°C',
-    description: 'Ancient granite formations and spiritual heritage',
+    description: 'Ancient granite formations and spiritual heritage with thousands of years of rock art and stunning landscapes.',
     gallery: [
       'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
@@ -76,6 +78,63 @@ const destinations = {
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+    ]
+  },
+  'mana-pools': {
+    name: 'Mana Pools National Park',
+    tagline: 'Pristine Wilderness Paradise',
+    videoUrl: 'https://player.vimeo.com/external/mana.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=1920&h=1080&fit=crop',
+    unesco: true,
+    usp: 'UNESCO World Heritage Site with pristine wilderness',
+    bestSeason: 'Dry season: May - October',
+    temperature: '20-32°C',
+    description: 'A UNESCO World Heritage Site known for its pristine wilderness, incredible wildlife, and the mighty Zambezi River. Famous for walking safaris and canoeing adventures.',
+    gallery: [
+      'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+    ]
+  },
+  'great-zimbabwe': {
+    name: 'Great Zimbabwe',
+    tagline: 'Ancient African Kingdom',
+    videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1920&h=1080&fit=crop',
+    unesco: true,
+    usp: 'Ancient stone city that gave Zimbabwe its name',
+    bestSeason: 'Cool season: April - August',
+    temperature: '18-28°C',
+    description: 'The ancient stone city that gave Zimbabwe its name. These magnificent ruins represent the largest ancient structure south of the Sahara Desert.',
+    gallery: [
+      'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+    ]
+  },
+  'eastern-highlands': {
+    name: 'Eastern Highlands',
+    tagline: 'Misty Mountains & Tea Plantations',
+    videoUrl: 'https://player.vimeo.com/external/highlands.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+    unesco: false,
+    usp: 'Cool mountain climate and scenic landscapes',
+    bestSeason: 'Year-round: April - September ideal',
+    temperature: '15-25°C',
+    description: 'Experience the cool mountain climate, mist-covered peaks, and rolling tea plantations of Zimbabwe\'s Eastern Highlands.',
+    gallery: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=800&h=600&fit=crop'
     ]
   }
 };
@@ -92,7 +151,21 @@ const DestinationPage = () => {
   }, []);
 
   if (!destination) {
-    return <div>Destination not found</div>;
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+        <EnhancedNavigation />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">Destination Not Found</h1>
+            <p className="text-xl text-gray-600 mb-4">Sorry, we couldn't find the destination you're looking for.</p>
+            <Link to="/" className="text-orange-600 hover:text-orange-700 underline">
+              Return to Home
+            </Link>
+          </div>
+        </div>
+        <EnhancedFooter />
+      </div>
+    );
   }
 
   const nextImage = () => {
@@ -105,6 +178,8 @@ const DestinationPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+      <EnhancedNavigation />
+      
       {/* Hero Section with Video */}
       <section className="relative h-screen overflow-hidden">
         <div
@@ -335,6 +410,8 @@ const DestinationPage = () => {
           </div>
         </div>
       )}
+
+      <EnhancedFooter />
     </div>
   );
 };
