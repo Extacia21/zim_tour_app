@@ -267,8 +267,8 @@ const destinations = {
     gallery: [
       'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop'
     ]
   },
   'chinhoyi-caves': {
