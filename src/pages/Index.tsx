@@ -27,7 +27,7 @@ const destinations = [
     name: 'Victoria Falls',
     slug: 'victoria-falls',
     tagline: 'The Smoke That Thunders',
-    image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=600&fit=crop',
+    image: '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
     rating: 4.9,
     reviews: 2847,
     unesco: true,

@@ -34,7 +34,7 @@ const destinations = {
     name: 'Victoria Falls',
     tagline: 'The Smoke That Thunders',
     videoUrl: 'https://player.vimeo.com/external/342394285.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
     unesco: true,
     usp: 'One of the Seven Natural Wonders of the World',
     bestSeason: 'Peak flow: March - May | Dry season: June - November',
@@ -58,7 +58,7 @@ const destinations = {
       budget: ["Victoria Falls Backpackers"]
     },
     gallery: [
-      'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=600&fit=crop',
+      '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
       'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
