@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import CulturalImmersion from "@/components/CulturalImmersion";
+import EnhancedNavigation from "@/components/EnhancedNavigation";
 import { 
   Search, 
   MapPin, 
@@ -21,7 +22,11 @@ import {
   X,
   ArrowRight,
   Binoculars,
-  Mountain
+  Mountain,
+  Compass,
+  TreePine,
+  Sunset,
+  MapIcon
 } from "lucide-react";
 
 const destinations = [
@@ -33,10 +38,11 @@ const destinations = [
     rating: 4.9,
     reviews: 2847,
     image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop",
-    description: "One of the Seven Natural Wonders of the World",
+    description: "One of the Seven Natural Wonders of the World - witness the thundering 'Smoke that Thunders'",
     category: "Natural Wonder",
     price: "$250",
-    duration: "Full Day"
+    duration: "Full Day",
+    highlight: "UNESCO World Heritage Site"
   },
   {
     id: 2,
@@ -46,10 +52,11 @@ const destinations = [
     rating: 4.7,
     reviews: 1243,
     image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop",
-    description: "Ancient city ruins and UNESCO World Heritage Site",
+    description: "Ancient stone city and UNESCO World Heritage Site - birthplace of modern Zimbabwe",
     category: "Historical",
     price: "$120",
-    duration: "Half Day"
+    duration: "Half Day",
+    highlight: "900+ years old"
   },
   {
     id: 3,
@@ -59,10 +66,11 @@ const destinations = [
     rating: 4.8,
     reviews: 1856,
     image: "https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop",
-    description: "Largest national park with diverse wildlife",
+    description: "Zimbabwe's largest national park with 40,000+ elephants and incredible wildlife diversity",
     category: "Wildlife",
     price: "$180",
-    duration: "2 Days"
+    duration: "2 Days",
+    highlight: "Big 5 Safari"
   },
   {
     id: 4,
@@ -72,10 +80,11 @@ const destinations = [
     rating: 4.9,
     reviews: 987,
     image: "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=800&h=600&fit=crop",
-    description: "UNESCO site known for canoeing and wildlife",
+    description: "UNESCO wilderness area known for walking safaris and canoe expeditions on the Zambezi",
     category: "Adventure",
     price: "$320",
-    duration: "3 Days"
+    duration: "3 Days",
+    highlight: "Walking Safari Paradise"
   },
   {
     id: 5,
@@ -85,10 +94,11 @@ const destinations = [
     rating: 4.6,
     reviews: 1456,
     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
-    description: "Scenic mountains and cool climate retreat",
+    description: "Scenic mountain ranges with cool climate, coffee plantations, and stunning vistas",
     category: "Natural Wonder",
     price: "$200",
-    duration: "2 Days"
+    duration: "2 Days",
+    highlight: "Coffee & Mountain Views"
   },
   {
     id: 6,
@@ -98,10 +108,32 @@ const destinations = [
     rating: 4.5,
     reviews: 892,
     image: "https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop",
-    description: "Ancient rock formations and cultural heritage",
+    description: "Ancient granite rock formations with world's highest density of rock art and spiritual significance",
     category: "Historical",
     price: "$150",
+    duration: "Full Day",
+    highlight: "Ancient Rock Art"
+  }
+];
+
+const featuredExperiences = [
+  {
+    title: "Victoria Falls Helicopter Flight",
+    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=300&fit=crop",
+    price: "$180",
+    duration: "15 mins"
+  },
+  {
+    title: "Hwange Elephant Safari",
+    image: "https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=400&h=300&fit=crop",
+    price: "$220",
     duration: "Full Day"
+  },
+  {
+    title: "Great Zimbabwe Cultural Tour",
+    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=300&fit=crop",
+    price: "$85",
+    duration: "Half Day"
   }
 ];
 
@@ -161,85 +193,113 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-amber-50">
-      {/* Header */}
-      <header className="bg-white/95 backdrop-blur-xl border-b border-orange-200 sticky top-0 z-50 shadow-sm">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                Zimbabwe Wanderlust
+      <EnhancedNavigation />
+
+      {/* Enhanced Hero Section */}
+      <section className="relative min-h-screen overflow-hidden">
+        {/* Background with multiple layers */}
+        <div className="absolute inset-0">
+          <div
+            className="w-full h-full bg-cover bg-center"
+            style={{ 
+              backgroundImage: `url(https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=1080&fit=crop)` 
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
+          </div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col justify-center min-h-screen px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="text-center">
+            <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 drop-shadow-2xl">
+              Discover
+              <span className="block bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+                Zimbabwe
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-orange-200 mb-8 max-w-4xl mx-auto font-light">
+              Experience the thundering Victoria Falls, witness Africa's Big Five, explore ancient ruins, 
+              and immerse yourself in authentic Zimbabwean culture
+            </p>
+            
+            {/* Quick Stats */}
+            <div className="flex flex-wrap justify-center gap-6 mb-12">
+              <div className="text-center bg-black/30 backdrop-blur-sm rounded-lg p-4 border border-orange-500/30">
+                <div className="text-3xl font-bold text-orange-400">7</div>
+                <div className="text-white text-sm">UNESCO Sites</div>
+              </div>
+              <div className="text-center bg-black/30 backdrop-blur-sm rounded-lg p-4 border border-orange-500/30">
+                <div className="text-3xl font-bold text-orange-400">40,000+</div>
+                <div className="text-white text-sm">Elephants</div>
+              </div>
+              <div className="text-center bg-black/30 backdrop-blur-sm rounded-lg p-4 border border-orange-500/30">
+                <div className="text-3xl font-bold text-orange-400">100+</div>
+                <div className="text-white text-sm">Activities</div>
               </div>
             </div>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <button 
-                onClick={() => scrollToSection('destinations')}
-                className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
-              >
-                Destinations
-              </button>
-              <Link to="/wildlife" className="text-gray-700 hover:text-orange-600 transition-colors">
-                Wildlife
-              </Link>
-              <button 
-                onClick={() => scrollToSection('features')}
-                className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
-              >
-                Experience
-              </button>
-              <button 
-                onClick={() => scrollToSection('culture')}
-                className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
-              >
-                Culture
-              </button>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
-              >
-                Contact
-              </button>
-            </div>
-            
-            <Button 
-              onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
-            >
-              Plan Your Journey
-            </Button>
-          </div>
-        </nav>
-      </header>
 
-      {/* Hero Section */}
-      <section className="relative py-24 px-4 text-center bg-gradient-to-br from-orange-100 to-red-100">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-            Discover
-            <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent"> Zimbabwe</span>
-          </h1>
-          <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
-            Experience the natural wonders, rich culture, and incredible wildlife of Zimbabwe with our expertly crafted immersive tours and authentic local experiences
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              onClick={() => scrollToSection('destinations')}
-              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-8 py-4 text-lg"
-            >
-              <Binoculars className="h-5 w-5 mr-2" />
-              Explore Destinations
-            </Button>
-            <Link to="/wildlife">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                variant="outline" 
-                className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8 py-4 text-lg w-full"
+                onClick={() => scrollToSection('destinations')}
+                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-8 py-4 text-lg shadow-2xl hover:scale-105 transition-all duration-300"
               >
-                <Users className="h-5 w-5 mr-2" />
-                Discover Wildlife
+                <Binoculars className="h-5 w-5 mr-2" />
+                Explore Destinations
               </Button>
-            </Link>
+              <Link to="/wildlife">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-2 border-white/50 text-white hover:bg-white/10 px-8 py-4 text-lg backdrop-blur-sm hover:scale-105 transition-all duration-300 w-full"
+                >
+                  <Users className="h-5 w-5 mr-2" />
+                  Wildlife Safari
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Experiences Section */}
+      <section className="py-20 bg-gradient-to-r from-orange-100 to-red-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Signature Experiences</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Handpicked adventures that showcase the very best of Zimbabwe
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredExperiences.map((experience, index) => (
+              <Card key={index} className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="relative overflow-hidden h-48">
+                  <img
+                    src={experience.image}
+                    alt={experience.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <h3 className="font-bold text-lg">{experience.title}</h3>
+                    <div className="flex items-center gap-4 mt-2">
+                      <span className="text-orange-300 font-semibold">{experience.price}</span>
+                      <span className="text-white/80 text-sm">{experience.duration}</span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -316,7 +376,7 @@ const Index = () => {
           </div>
         )}
 
-        {/* Destinations Grid */}
+        {/* Enhanced Destinations Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredDestinations.map((destination) => (
             <Card 
@@ -339,6 +399,11 @@ const Index = () => {
                   <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
                   <span className="text-sm font-semibold text-gray-900">{destination.rating}</span>
                 </div>
+                <div className="absolute bottom-4 left-4">
+                  <Badge variant="outline" className="bg-white/90 backdrop-blur-sm text-orange-600 border-orange-600">
+                    {destination.highlight}
+                  </Badge>
+                </div>
                 <button 
                   onClick={() => toggleFavorite(destination.id)}
                   className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 text-gray-700 hover:bg-orange-500 hover:text-white transition-colors"
@@ -359,7 +424,7 @@ const Index = () => {
                   <MapPin className="h-4 w-4 mr-1" />
                   <span className="text-sm">{destination.location}</span>
                 </div>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">{destination.description}</p>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{destination.description}</p>
                 
                 <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                   <div className="flex items-center gap-1">
@@ -420,7 +485,7 @@ const Index = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose Zimbabwe Wanderlust?</h2>
             <p className="text-gray-700 max-w-2xl mx-auto text-lg">
-              We provide authentic, expertly guided experiences that showcase the best of Zimbabwe with cutting-edge features
+              We provide authentic, expertly guided experiences that showcase the best of Zimbabwe
             </p>
           </div>
           
@@ -428,19 +493,19 @@ const Index = () => {
             <Card className="bg-white shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Camera className="h-16 w-16 text-orange-600 mx-auto mb-6" />
               <h3 className="text-gray-900 font-bold text-xl mb-4">Immersive Experiences</h3>
-              <p className="text-gray-600">HD video showcases, interactive galleries, and real-time wildlife tracking for unforgettable memories</p>
+              <p className="text-gray-600">Professional photography tours, cultural immersion programs, and exclusive access to hidden gems</p>
             </Card>
             
             <Card className="bg-white shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Users className="h-16 w-16 text-orange-600 mx-auto mb-6" />
               <h3 className="text-gray-900 font-bold text-xl mb-4">Expert Local Guides</h3>
-              <p className="text-gray-600">Learn from passionate locals with cultural insights, folklore, and hidden gems only they know</p>
+              <p className="text-gray-600">Passionate Zimbabwean guides with deep cultural knowledge and wildlife expertise</p>
             </Card>
             
             <Card className="bg-white shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
-              <Mountain className="h-16 w-16 text-orange-600 mx-auto mb-6" />
-              <h3 className="text-gray-900 font-bold text-xl mb-4">Smart Travel Tools</h3>
-              <p className="text-gray-600">Multi-modal navigation, hotel discovery system, and activities database for seamless planning</p>
+              <Compass className="h-16 w-16 text-orange-600 mx-auto mb-6" />
+              <h3 className="text-gray-900 font-bold text-xl mb-4">Sustainable Tourism</h3>
+              <p className="text-gray-600">Supporting local communities and conservation efforts throughout Zimbabwe</p>
             </Card>
           </div>
         </div>
@@ -484,13 +549,45 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent mb-4">
-            Zimbabwe Wanderlust
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent mb-4">
+                Zimbabwe Wanderlust
+              </div>
+              <p className="text-gray-400 mb-4">
+                Discover the heart of Africa through authentic experiences and unforgettable adventures.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Destinations</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link to="/destination/victoria-falls" className="hover:text-orange-400">Victoria Falls</Link></li>
+                <li><Link to="/destination/hwange" className="hover:text-orange-400">Hwange National Park</Link></li>
+                <li><Link to="/destination/great-zimbabwe" className="hover:text-orange-400">Great Zimbabwe</Link></li>
+                <li><Link to="/destination/mana-pools" className="hover:text-orange-400">Mana Pools</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Experiences</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link to="/wildlife" className="hover:text-orange-400">Wildlife Safari</Link></li>
+                <li><Link to="/hotels/all" className="hover:text-orange-400">Luxury Lodges</Link></li>
+                <li><Link to="/activities/all" className="hover:text-orange-400">Adventure Activities</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Contact</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>+263 4 123 456</li>
+                <li>info@zimwanderlust.com</li>
+                <li>Harare, Zimbabwe</li>
+              </ul>
+            </div>
           </div>
-          <p className="text-gray-400">
-            © 2024 Zimbabwe Wanderlust. All rights reserved. Experience the magic of Zimbabwe with authentic cultural immersion.
-          </p>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>© 2024 Zimbabwe Wanderlust. All rights reserved. Experience the magic of Zimbabwe.</p>
+          </div>
         </div>
       </footer>
 
