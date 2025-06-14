@@ -1,14 +1,17 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Star, Calendar, Users, ArrowRight, Sparkles } from "lucide-react";
+import { Search, MapPin, Star, Calendar, Users, ArrowRight, Sparkles, Eye } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import AITravelConcierge from "@/components/AITravelConcierge";
 import SafetyToolkit from "@/components/SafetyToolkit";
 import Interactive3DGlobe from "@/components/Interactive3DGlobe";
 import BookingEngine from "@/components/BookingEngine";
+import DynamicHeroSection from "@/components/DynamicHeroSection";
+import HotelDiscoverySystem from "@/components/HotelDiscoverySystem";
+import NavigationHeader from "@/components/NavigationHeader";
+import EnhancedFooter from "@/components/EnhancedFooter";
 
 const destinations = [
   {
@@ -84,7 +87,7 @@ const categories = ["All", "Natural Wonder", "Historical", "Wildlife", "Adventur
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeSection, setActiveSection] = useState<'explore' | 'booking' | 'globe'>('explore');
+  const [activeSection, setActiveSection] = useState<'explore' | 'booking' | 'globe' | 'hotels'>('explore');
 
   const filteredDestinations = destinations.filter(dest => {
     const matchesCategory = selectedCategory === "All" || dest.category === selectedCategory;
@@ -95,8 +98,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
+      {/* Navigation Header */}
+      <NavigationHeader />
+
       {/* Animated Background Particles */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(50)].map((_, i) => (
           <div
             key={i}
@@ -111,59 +117,31 @@ const Index = () => {
         ))}
       </div>
 
-      {/* Safety Toolkit */}
+      {/* Safety Toolkit & AI Concierge (Fixed Position) */}
       <SafetyToolkit />
-
-      {/* AI Travel Concierge */}
       <AITravelConcierge />
 
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-orange-900/90 via-red-900/90 to-pink-900/90 text-white">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=1080&fit=crop')] bg-cover bg-center opacity-30"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80"></div>
-        <div className="relative max-w-7xl mx-auto px-4 py-32 sm:px-6 lg:px-8">
-          <div className="text-center animate-fade-in">
-            <div className="flex items-center justify-center gap-2 mb-6">
-              <Sparkles className="h-8 w-8 text-yellow-400 animate-pulse" />
-              <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-yellow-200 via-orange-300 to-red-300 bg-clip-text text-transparent">
-                Zimbabwe
-              </h1>
-              <Sparkles className="h-8 w-8 text-yellow-400 animate-pulse" />
-            </div>
-            <p className="text-2xl md:text-3xl mb-8 text-orange-100 max-w-4xl mx-auto font-light">
-              Experience Africa's hidden gem through <span className="text-yellow-300 font-semibold">AI-powered exploration</span>, 
-              <span className="text-blue-300 font-semibold"> AR adventures</span>, and 
-              <span className="text-green-300 font-semibold"> immersive experiences</span>
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-8 py-4 text-lg font-semibold shadow-2xl hover:scale-105 transition-all duration-300"
-              >
-                <Sparkles className="h-5 w-5 mr-2" />
-                Start AR Adventure
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-orange-400 text-orange-400 hover:bg-orange-400/10 px-8 py-4 text-lg font-semibold backdrop-blur-sm hover:scale-105 transition-all duration-300"
-              >
-                Explore with AI Guide
-                <ArrowRight className="h-5 w-5 ml-2" />
-              </Button>
-            </div>
-          </div>
-        </div>
+      {/* Dynamic Hero Section */}
+      <DynamicHeroSection />
+
+      {/* Breadcrumb Navigation */}
+      <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+        <nav className="flex items-center space-x-2 text-sm">
+          <a href="#" className="text-orange-400 hover:text-orange-300">Home</a>
+          <span className="text-gray-500">/</span>
+          <span className="text-gray-300">Destinations</span>
+        </nav>
       </div>
 
       {/* Navigation Tabs */}
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex justify-center mb-8">
           <div className="bg-black/90 backdrop-blur-xl rounded-2xl p-2 border border-orange-500/30">
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               {[
                 { id: 'explore', label: 'Explore Destinations', icon: Search },
                 { id: 'globe', label: '3D Globe View', icon: MapPin },
+                { id: 'hotels', label: 'Find Hotels', icon: Eye },
                 { id: 'booking', label: 'Book Experiences', icon: Calendar }
               ].map((tab) => (
                 <Button
@@ -191,10 +169,11 @@ const Index = () => {
           </div>
         )}
 
+        {/* Hotel Discovery Section */}
+        {activeSection === 'hotels' && <HotelDiscoverySystem />}
+
         {/* Booking Engine Section */}
-        {activeSection === 'booking' && (
-          <BookingEngine />
-        )}
+        {activeSection === 'booking' && <BookingEngine />}
 
         {/* Explore Destinations Section */}
         {activeSection === 'explore' && (
@@ -242,6 +221,7 @@ const Index = () => {
                       src={destination.image}
                       alt={destination.name}
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     <div className="absolute top-4 left-4">
@@ -286,7 +266,7 @@ const Index = () => {
 
                       <div className="flex gap-2 pt-2">
                         <Button className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 shadow-lg">
-                          Launch AR View
+                          Explore in AR
                         </Button>
                         <Button variant="outline" className="border-orange-500/30 text-orange-400 hover:bg-orange-500/20">
                           <Calendar className="h-4 w-4" />
@@ -331,6 +311,9 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* Enhanced Footer */}
+      <EnhancedFooter />
     </div>
   );
 };
