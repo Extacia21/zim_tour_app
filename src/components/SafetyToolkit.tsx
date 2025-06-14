@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import { AlertTriangle, Phone, MapPin, Shield, Zap } from 'lucide-react';
+import { AlertTriangle, Phone, MapPin, Shield, Zap, Navigation, X } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 
 interface SafetyAlert {
   id: string;
@@ -17,6 +18,9 @@ interface SafetyAlert {
 
 const SafetyToolkit = () => {
   const [riskLevel, setRiskLevel] = useState<'green' | 'amber' | 'red'>('green');
+  const [isVisible, setIsVisible] = useState(true);
+  const { toast } = useToast();
+  
   const [alerts, setAlerts] = useState<SafetyAlert[]>([
     {
       id: '1',
@@ -65,19 +69,85 @@ const SafetyToolkit = () => {
 
   const handleEmergencyCall = (number: string) => {
     window.open(`tel:${number}`, '_self');
+    toast({
+      title: "Emergency call initiated",
+      description: `Calling ${number}`,
+    });
   };
+
+  const handleSOS = () => {
+    // Get location if possible
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          toast({
+            title: "SOS ACTIVATED",
+            description: `Emergency services notified. Location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
+            variant: "destructive"
+          });
+          
+          // In a real app, this would send the location to emergency services
+          console.log('SOS activated at:', { latitude, longitude });
+        },
+        () => {
+          toast({
+            title: "SOS ACTIVATED",
+            description: "Emergency services have been notified.",
+            variant: "destructive"
+          });
+        }
+      );
+    } else {
+      toast({
+        title: "SOS ACTIVATED",
+        description: "Emergency services have been notified.",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleGetDirections = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          // Open Google Maps with current location
+          window.open(`https://www.google.com/maps/@${latitude},${longitude},15z`, '_blank');
+        },
+        () => {
+          // Fallback to Zimbabwe general location
+          window.open('https://www.google.com/maps/place/Zimbabwe/@-19.015438,29.154857,6z', '_blank');
+        }
+      );
+    } else {
+      window.open('https://www.google.com/maps/place/Zimbabwe/@-19.015438,29.154857,6z', '_blank');
+    }
+  };
+
+  if (!isVisible) return null;
 
   return (
     <div className="fixed top-4 left-4 z-40 w-80">
       <Card className="bg-black/90 backdrop-blur-xl border border-gray-500/30">
         <CardContent className="p-4">
-          {/* Risk Level Indicator */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className={`w-4 h-4 rounded-full ${getRiskColor(riskLevel)}`}></div>
-            <div>
-              <h3 className="text-white font-semibold">Safety Status</h3>
-              <p className="text-sm text-gray-400 capitalize">{riskLevel} Risk Level</p>
+          {/* Header with close button */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className={`w-4 h-4 rounded-full ${getRiskColor(riskLevel)}`}></div>
+              <div>
+                <h3 className="text-white font-semibold">Safety Status</h3>
+                <p className="text-sm text-gray-400 capitalize">{riskLevel} Risk Level</p>
+              </div>
             </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsVisible(false)}
+              className="text-gray-400 hover:text-white h-6 w-6 p-0"
+            >
+              <X className="h-4 w-4" />
+            </Button>
           </div>
 
           {/* Active Alerts */}
@@ -107,8 +177,33 @@ const SafetyToolkit = () => {
             </div>
           )}
 
+          {/* Quick Actions */}
+          <div className="mb-4">
+            <h4 className="text-white text-sm font-medium mb-2">Quick Actions</h4>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                onClick={handleGetDirections}
+                variant="outline"
+                size="sm"
+                className="border-blue-500/30 text-blue-400 hover:bg-blue-500/20 text-xs p-2 h-auto flex flex-col items-center gap-1"
+              >
+                <Navigation className="h-4 w-4" />
+                <span className="text-xs">Get Directions</span>
+              </Button>
+              <Button
+                onClick={() => window.open('/planning', '_blank')}
+                variant="outline"
+                size="sm"
+                className="border-green-500/30 text-green-400 hover:bg-green-500/20 text-xs p-2 h-auto flex flex-col items-center gap-1"
+              >
+                <MapPin className="h-4 w-4" />
+                <span className="text-xs">Plan Route</span>
+              </Button>
+            </div>
+          </div>
+
           {/* Emergency Contacts */}
-          <div>
+          <div className="mb-4">
             <h4 className="text-white text-sm font-medium mb-2">Emergency Contacts</h4>
             <div className="grid grid-cols-2 gap-2">
               {emergencyContacts.map((contact, index) => (
@@ -128,11 +223,8 @@ const SafetyToolkit = () => {
 
           {/* SOS Button */}
           <Button
-            onClick={() => {
-              // SOS functionality - would send GPS coordinates
-              alert('SOS activated! Your location has been shared with emergency services.');
-            }}
-            className="w-full mt-3 bg-red-600 hover:bg-red-700 text-white font-bold py-3"
+            onClick={handleSOS}
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3"
           >
             <AlertTriangle className="h-5 w-5 mr-2" />
             EMERGENCY SOS

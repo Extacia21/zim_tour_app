@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Play, Pause, Volume2, VolumeX, Sparkles, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface HeroLocation {
   id: string;
@@ -22,7 +23,7 @@ const heroLocations: HeroLocation[] = [
     name: 'Victoria Falls',
     tagline: 'Where Thunder Meets Rainbow',
     backgroundVideo: 'https://player.vimeo.com/external/342394285.hd.mp4?s=1234',
-    backgroundImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
     ambientSound: '/sounds/waterfall.mp3',
     description: 'Experience the raw power of one of the Seven Natural Wonders',
     keyHighlight: 'Best helicopter views in Africa',
@@ -33,7 +34,7 @@ const heroLocations: HeroLocation[] = [
     name: 'Hwange National Park',
     tagline: 'Giants of the Savanna',
     backgroundVideo: 'https://player.vimeo.com/external/elephants.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/bc57d6ad-4055-4d57-9112-57f8c856f2e8.png',
     ambientSound: '/sounds/savanna.mp3',
     description: 'Home to 40,000+ elephants and diverse wildlife',
     keyHighlight: '400+ bird species',
@@ -44,7 +45,7 @@ const heroLocations: HeroLocation[] = [
     name: 'Great Zimbabwe',
     tagline: 'Ancient Stone City Under Stars',
     backgroundVideo: 'https://player.vimeo.com/external/ruins.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/f5b7c9ff-098f-4495-ac5d-011d1dfce65f.png',
     ambientSound: '/sounds/night-sounds.mp3',
     description: 'UNESCO World Heritage Site with 900-year-old mysteries',
     keyHighlight: 'Largest ancient structures south of Sahara',
@@ -80,6 +81,25 @@ const DynamicHeroSection = () => {
   const toggleSound = () => {
     setSoundEnabled(!soundEnabled);
     // In a real app, this would control audio playback
+  };
+
+  const handleExploreLocation = () => {
+    // Navigate to the specific destination page
+    window.location.href = `/destination/${location.id}`;
+  };
+
+  const handleBookExperience = () => {
+    // Navigate to planning page
+    window.location.href = '/planning';
+  };
+
+  const handleStartJourney = () => {
+    const element = document.getElementById('destinations-section');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleVirtualTour = () => {
+    window.open('https://www.google.com/maps/@-17.9245,25.8566,3a,75y,90t,0h/data=!3m7!1e1!3m5!1sAF1QipOtO9_8B-RV-V-V4V4V4V4V4V4V4V4V4V!2e10!3e11!7i8192!8i4096', '_blank');
   };
 
   return (
@@ -194,6 +214,7 @@ const DynamicHeroSection = () => {
             {/* Action buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Button 
+                onClick={handleExploreLocation}
                 size="lg" 
                 className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-8 py-4 text-lg font-semibold shadow-2xl hover:scale-105 transition-all duration-300"
               >
@@ -202,6 +223,7 @@ const DynamicHeroSection = () => {
               </Button>
               
               <Button 
+                onClick={handleBookExperience}
                 size="lg" 
                 variant="outline" 
                 className="border-2 border-white/50 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold backdrop-blur-sm hover:scale-105 transition-all duration-300"

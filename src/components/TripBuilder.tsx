@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Calendar, MapPin, Users, Clock, Star } from 'lucide-react';
+import { Calendar, MapPin, Users, Clock, Star, Download, Share2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const destinations = [
   {
@@ -60,6 +61,7 @@ const destinations = [
 const TripBuilder = () => {
   const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);
   const [tripDuration, setTripDuration] = useState(0);
+  const { toast } = useToast();
 
   const handleDestinationToggle = (slug: string, duration: string) => {
     const days = parseInt(duration.split('-')[0]);
@@ -70,6 +72,85 @@ const TripBuilder = () => {
     } else {
       setSelectedDestinations(prev => [...prev, slug]);
       setTripDuration(prev => prev + days);
+    }
+  };
+
+  const handleSaveItinerary = () => {
+    if (selectedDestinations.length === 0) {
+      toast({
+        title: "No destinations selected",
+        description: "Please select at least one destination to save your itinerary.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const itinerary = {
+      destinations: selectedDestinationData,
+      totalDuration: tripDuration,
+      createdAt: new Date().toISOString()
+    };
+
+    localStorage.setItem('zimbabwe-itinerary', JSON.stringify(itinerary));
+    
+    toast({
+      title: "Itinerary saved!",
+      description: `Your ${tripDuration}-day Zimbabwe adventure has been saved.`,
+    });
+  };
+
+  const handleDownloadItinerary = () => {
+    if (selectedDestinations.length === 0) {
+      toast({
+        title: "No destinations selected",
+        description: "Please select destinations first.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const itineraryText = selectedDestinationData.map((dest, index) => 
+      `Day ${index === 0 ? '1' : `${index * 3 + 1}`}-${index * 3 + parseInt(dest.duration.split('-')[0])}: ${dest.name}\n` +
+      `Activities: ${dest.activities.join(', ')}\n` +
+      `Accommodation: ${dest.accommodation}\n\n`
+    ).join('');
+
+    const blob = new Blob([`Zimbabwe Adventure Itinerary\n\n${itineraryText}`], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'zimbabwe-itinerary.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    toast({
+      title: "Itinerary downloaded!",
+      description: "Your itinerary has been saved as a text file.",
+    });
+  };
+
+  const handleShareItinerary = () => {
+    if (selectedDestinations.length === 0) {
+      toast({
+        title: "No destinations selected",
+        description: "Please select destinations first.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (navigator.share) {
+      navigator.share({
+        title: 'My Zimbabwe Adventure',
+        text: `Check out my ${tripDuration}-day Zimbabwe itinerary featuring ${selectedDestinations.length} amazing destinations!`,
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      toast({
+        title: "Link copied!",
+        description: "Share link has been copied to your clipboard.",
+      });
     }
   };
 
@@ -164,14 +245,26 @@ const TripBuilder = () => {
                 </div>
                 
                 <div className="mt-6 pt-4 border-t">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mb-4">
                     <div>
                       <p className="font-semibold">Total Trip Duration: {tripDuration}+ days</p>
                       <p className="text-sm text-gray-600">Estimated cost varies by accommodation choice</p>
                     </div>
-                    <Button className="bg-orange-600 hover:bg-orange-700">
+                  </div>
+                  
+                  {/* Action buttons */}
+                  <div className="flex flex-wrap gap-2">
+                    <Button onClick={handleSaveItinerary} className="bg-orange-600 hover:bg-orange-700">
                       <Star className="h-4 w-4 mr-2" />
                       Save Itinerary
+                    </Button>
+                    <Button onClick={handleDownloadItinerary} variant="outline">
+                      <Download className="h-4 w-4 mr-2" />
+                      Download
+                    </Button>
+                    <Button onClick={handleShareItinerary} variant="outline">
+                      <Share2 className="h-4 w-4 mr-2" />
+                      Share
                     </Button>
                   </div>
                 </div>
