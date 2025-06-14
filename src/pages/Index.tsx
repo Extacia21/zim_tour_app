@@ -1,10 +1,12 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import CulturalImmersion from "@/components/CulturalImmersion";
 import { 
   Search, 
   MapPin, 
@@ -17,12 +19,16 @@ import {
   Globe,
   Clock,
   Heart,
-  X
+  X,
+  ArrowRight,
+  Binoculars,
+  Mountain
 } from "lucide-react";
 
 const destinations = [
   {
     id: 1,
+    slug: "victoria-falls",
     name: "Victoria Falls",
     location: "Livingstone Border",
     rating: 4.9,
@@ -35,6 +41,7 @@ const destinations = [
   },
   {
     id: 2,
+    slug: "great-zimbabwe",
     name: "Great Zimbabwe",
     location: "Masvingo Province",
     rating: 4.7,
@@ -47,6 +54,7 @@ const destinations = [
   },
   {
     id: 3,
+    slug: "hwange",
     name: "Hwange National Park",
     location: "Matabeleland North",
     rating: 4.8,
@@ -59,6 +67,7 @@ const destinations = [
   },
   {
     id: 4,
+    slug: "mana-pools",
     name: "Mana Pools",
     location: "Mashonaland Central",
     rating: 4.9,
@@ -71,6 +80,7 @@ const destinations = [
   },
   {
     id: 5,
+    slug: "eastern-highlands",
     name: "Eastern Highlands",
     location: "Manicaland Province",
     rating: 4.6,
@@ -83,6 +93,7 @@ const destinations = [
   },
   {
     id: 6,
+    slug: "matobo",
     name: "Matobo Hills",
     location: "Bulawayo",
     rating: 4.5,
@@ -150,14 +161,13 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-amber-50">
       {/* Header */}
-      <header className="bg-black/95 backdrop-blur-xl border-b border-orange-500/30 sticky top-0 z-50">
-        <div className="h-1 bg-gradient-to-r from-green-500 via-yellow-400 via-red-500 to-green-500"></div>
+      <header className="bg-white/95 backdrop-blur-xl border-b border-orange-200 sticky top-0 z-50 shadow-sm">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+              <div className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                 Zimbabwe Wanderlust
               </div>
             </div>
@@ -165,19 +175,25 @@ const Index = () => {
             <div className="hidden md:flex items-center space-x-8">
               <button 
                 onClick={() => scrollToSection('destinations')}
-                className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer"
+                className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 Destinations
               </button>
               <button 
                 onClick={() => scrollToSection('features')}
-                className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer"
+                className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
-                Tours
+                Experience
+              </button>
+              <button 
+                onClick={() => scrollToSection('culture')}
+                className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
+              >
+                Culture
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer"
+                className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 Contact
               </button>
@@ -185,40 +201,41 @@ const Index = () => {
             
             <Button 
               onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
             >
-              Book Now
+              Plan Your Journey
             </Button>
           </div>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4 text-center">
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-900/50 to-red-900/50"></div>
-        <div className="relative max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+      <section className="relative py-24 px-4 text-center bg-gradient-to-br from-orange-100 to-red-100">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
             Discover
-            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent"> Zimbabwe</span>
+            <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent"> Zimbabwe</span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Experience the natural wonders, rich culture, and incredible wildlife of Zimbabwe with our expertly crafted tours
+          <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+            Experience the natural wonders, rich culture, and incredible wildlife of Zimbabwe with our expertly crafted immersive tours and authentic local experiences
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
               onClick={() => scrollToSection('destinations')}
-              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 text-lg"
+              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-8 py-4 text-lg"
             >
+              <Binoculars className="h-5 w-5 mr-2" />
               Explore Destinations
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              onClick={() => scrollToSection('features')}
-              className="border-orange-400 text-orange-400 hover:bg-orange-400/10 px-8 py-4 text-lg"
+              onClick={() => scrollToSection('culture')}
+              className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8 py-4 text-lg"
             >
-              View Tours
+              <Users className="h-5 w-5 mr-2" />
+              Cultural Experiences
             </Button>
           </div>
         </div>
@@ -226,20 +243,27 @@ const Index = () => {
 
       {/* Search and Filter Section */}
       <section id="destinations" className="max-w-7xl mx-auto px-4 py-16">
-        <div className="bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-orange-500/30 mb-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Iconic Destinations</h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            From thundering waterfalls to ancient ruins, discover Zimbabwe's most spectacular locations
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-xl p-6 border border-orange-200 mb-8">
           <div className="flex flex-col lg:flex-row gap-4 items-center">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-3 h-5 w-5 text-orange-400" />
+              <Search className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
               <Input
-                placeholder="Search destinations..."
-                className="pl-10 pr-10 h-12 text-lg bg-gray-800/50 border-orange-500/30 text-white placeholder:text-gray-400 focus:border-orange-500"
+                placeholder="Search destinations, experiences, wildlife..."
+                className="pl-10 pr-10 h-12 text-lg border-orange-200 focus:border-orange-500"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               {searchTerm && (
                 <button
                   onClick={clearSearch}
-                  className="absolute right-3 top-3 text-gray-400 hover:text-white"
+                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -253,7 +277,7 @@ const Index = () => {
                   onClick={() => setSelectedCategory(category)}
                   className={selectedCategory === category 
                     ? "bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700" 
-                    : "border-orange-500/30 text-orange-400 hover:bg-orange-500/20"
+                    : "border-orange-300 text-orange-600 hover:bg-orange-50"
                   }
                 >
                   {category}
@@ -264,7 +288,7 @@ const Index = () => {
           
           {filteredDestinations.length === 0 && (
             <div className="text-center py-8">
-              <p className="text-gray-400">No destinations found matching your search criteria.</p>
+              <p className="text-gray-500">No destinations found matching your search criteria.</p>
               <Button 
                 onClick={() => {
                   setSearchTerm("");
@@ -281,7 +305,7 @@ const Index = () => {
         {/* Results Summary */}
         {filteredDestinations.length > 0 && (
           <div className="mb-6 text-center">
-            <p className="text-gray-300">
+            <p className="text-gray-600">
               Showing {filteredDestinations.length} destination{filteredDestinations.length !== 1 ? 's' : ''}
               {selectedCategory !== "All" && ` in ${selectedCategory}`}
               {searchTerm && ` matching "${searchTerm}"`}
@@ -290,70 +314,82 @@ const Index = () => {
         )}
 
         {/* Destinations Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredDestinations.map((destination) => (
             <Card 
               key={destination.id} 
-              className="group overflow-hidden border-0 shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 hover:scale-105 bg-black/90 backdrop-blur-xl border border-orange-500/20 hover:border-orange-500/50"
+              className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 bg-white"
             >
               <div className="relative overflow-hidden">
                 <img
                   src={destination.image}
                   alt={destination.name}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className="absolute top-3 left-3">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div className="absolute top-4 left-4">
                   <Badge className="bg-gradient-to-r from-orange-600 to-red-600 text-white">
                     {destination.category}
                   </Badge>
                 </div>
-                <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
-                  <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                  <span className="text-xs font-semibold text-white">{destination.rating}</span>
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
+                  <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
+                  <span className="text-sm font-semibold text-gray-900">{destination.rating}</span>
                 </div>
                 <button 
                   onClick={() => toggleFavorite(destination.id)}
-                  className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm rounded-full p-2 text-white hover:bg-orange-500/80 transition-colors"
+                  className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 text-gray-700 hover:bg-orange-500 hover:text-white transition-colors"
                 >
                   <Heart 
-                    className={`h-4 w-4 ${
+                    className={`h-5 w-5 ${
                       favoriteDestinations.includes(destination.id) 
                         ? 'fill-red-500 text-red-500' 
-                        : 'text-white'
+                        : 'text-gray-700'
                     }`} 
                   />
                 </button>
               </div>
               
-              <CardContent className="p-4">
-                <h3 className="text-lg font-bold text-white mb-1">{destination.name}</h3>
-                <div className="flex items-center text-orange-300 mb-2">
-                  <MapPin className="h-3 w-3 mr-1" />
-                  <span className="text-xs">{destination.location}</span>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{destination.name}</h3>
+                <div className="flex items-center text-orange-600 mb-3">
+                  <MapPin className="h-4 w-4 mr-1" />
+                  <span className="text-sm">{destination.location}</span>
                 </div>
-                <p className="text-gray-300 text-xs mb-3 line-clamp-2">{destination.description}</p>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-2">{destination.description}</p>
                 
-                <div className="flex items-center justify-between text-xs text-gray-400 mb-3">
+                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                   <div className="flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
+                    <Clock className="h-4 w-4" />
                     <span>{destination.duration}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Users className="h-3 w-3" />
+                    <Users className="h-4 w-4" />
                     <span>{destination.reviews} reviews</span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <div className="text-orange-400 font-bold">{destination.price}</div>
-                  <Button 
-                    size="sm" 
-                    onClick={() => handleBookNow(destination)}
-                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
-                  >
-                    Book Now
-                  </Button>
+                  <div className="text-orange-600 font-bold text-lg">{destination.price}</div>
+                  <div className="flex gap-2">
+                    <Link to={`/destination/${destination.slug}`}>
+                      <Button 
+                        size="sm" 
+                        variant="outline"
+                        className="border-orange-600 text-orange-600 hover:bg-orange-50"
+                      >
+                        <Camera className="h-4 w-4 mr-1" />
+                        Explore
+                      </Button>
+                    </Link>
+                    <Button 
+                      size="sm" 
+                      onClick={() => handleBookNow(destination)}
+                      className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
+                    >
+                      Book Now
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -362,74 +398,81 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="bg-gradient-to-r from-orange-900/20 to-red-900/20 py-16">
+      <section id="features" className="bg-gradient-to-r from-orange-100 to-red-100 py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Why Choose Zimbabwe Wanderlust?</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">
-              We provide authentic, expertly guided experiences that showcase the best of Zimbabwe
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose Zimbabwe Wanderlust?</h2>
+            <p className="text-gray-700 max-w-2xl mx-auto text-lg">
+              We provide authentic, expertly guided experiences that showcase the best of Zimbabwe with cutting-edge features
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center hover:border-orange-500/50 transition-colors">
-              <Camera className="h-12 w-12 text-orange-400 mx-auto mb-4" />
-              <h3 className="text-white font-bold mb-2">Expert Photography</h3>
-              <p className="text-gray-300 text-sm">Capture stunning memories with our professional photography services</p>
+            <Card className="bg-white shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <Camera className="h-16 w-16 text-orange-600 mx-auto mb-6" />
+              <h3 className="text-gray-900 font-bold text-xl mb-4">Immersive Experiences</h3>
+              <p className="text-gray-600">HD video showcases, interactive galleries, and real-time wildlife tracking for unforgettable memories</p>
             </Card>
             
-            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center hover:border-orange-500/50 transition-colors">
-              <Users className="h-12 w-12 text-orange-400 mx-auto mb-4" />
-              <h3 className="text-white font-bold mb-2">Local Guides</h3>
-              <p className="text-gray-300 text-sm">Learn from passionate locals who know every hidden gem</p>
+            <Card className="bg-white shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <Users className="h-16 w-16 text-orange-600 mx-auto mb-6" />
+              <h3 className="text-gray-900 font-bold text-xl mb-4">Expert Local Guides</h3>
+              <p className="text-gray-600">Learn from passionate locals with cultural insights, folklore, and hidden gems only they know</p>
             </Card>
             
-            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center hover:border-orange-500/50 transition-colors">
-              <Star className="h-12 w-12 text-orange-400 mx-auto mb-4" />
-              <h3 className="text-white font-bold mb-2">5-Star Service</h3>
-              <p className="text-gray-300 text-sm">Luxury accommodations and premium service throughout your journey</p>
+            <Card className="bg-white shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <Mountain className="h-16 w-16 text-orange-600 mx-auto mb-6" />
+              <h3 className="text-gray-900 font-bold text-xl mb-4">Smart Travel Tools</h3>
+              <p className="text-gray-600">Multi-modal navigation, hotel discovery system, and activities database for seamless planning</p>
             </Card>
           </div>
         </div>
       </section>
 
+      {/* Cultural Immersion Section */}
+      <section id="culture" className="py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <CulturalImmersion />
+        </div>
+      </section>
+
       {/* Contact Section */}
-      <section id="contact" className="py-16">
+      <section id="contact" className="py-20 bg-gradient-to-r from-orange-100 to-red-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-8">Ready to Start Your Adventure?</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-8">Ready to Start Your Adventure?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="flex items-center justify-center gap-3 text-gray-300">
-              <Phone className="h-5 w-5 text-orange-400" />
-              <span>+263 4 123 456</span>
+            <div className="flex items-center justify-center gap-3 text-gray-700">
+              <Phone className="h-6 w-6 text-orange-600" />
+              <span className="text-lg">+263 4 123 456</span>
             </div>
-            <div className="flex items-center justify-center gap-3 text-gray-300">
-              <Mail className="h-5 w-5 text-orange-400" />
-              <span>info@zimwanderlust.com</span>
+            <div className="flex items-center justify-center gap-3 text-gray-700">
+              <Mail className="h-6 w-6 text-orange-600" />
+              <span className="text-lg">info@zimwanderlust.com</span>
             </div>
-            <div className="flex items-center justify-center gap-3 text-gray-300">
-              <Globe className="h-5 w-5 text-orange-400" />
-              <span>Zimbabwe</span>
+            <div className="flex items-center justify-center gap-3 text-gray-700">
+              <Globe className="h-6 w-6 text-orange-600" />
+              <span className="text-lg">Zimbabwe</span>
             </div>
           </div>
           <Button 
             size="lg" 
             onClick={() => setShowBookingModal(true)}
-            className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 text-lg"
+            className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-8 py-4 text-lg"
           >
-            <Calendar className="h-5 w-5 mr-2" />
-            Plan Your Trip
+            <Calendar className="h-6 w-6 mr-2" />
+            Plan Your Trip Now
           </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-black border-t border-orange-500/30 py-8">
+      <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent mb-4">
+          <div className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent mb-4">
             Zimbabwe Wanderlust
           </div>
-          <p className="text-gray-400 text-sm">
-            © 2024 Zimbabwe Wanderlust. All rights reserved. Experience the magic of Zimbabwe.
+          <p className="text-gray-400">
+            © 2024 Zimbabwe Wanderlust. All rights reserved. Experience the magic of Zimbabwe with authentic cultural immersion.
           </p>
         </div>
       </footer>
@@ -437,15 +480,15 @@ const Index = () => {
       {/* Booking Modal */}
       {showBookingModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <Card className="bg-black/95 backdrop-blur-xl border border-orange-500/30 max-w-md w-full">
+          <Card className="bg-white max-w-md w-full">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-white">
+                <h3 className="text-xl font-bold text-gray-900">
                   {selectedDestination ? `Book ${selectedDestination.name}` : 'Plan Your Trip'}
                 </h3>
                 <button
                   onClick={() => setShowBookingModal(false)}
-                  className="text-gray-400 hover:text-white"
+                  className="text-gray-400 hover:text-gray-600"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -453,51 +496,51 @@ const Index = () => {
               
               <form onSubmit={handleBookingSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                   <Input 
                     required
-                    className="bg-gray-800/50 border-gray-600 text-white"
+                    className="border-gray-300"
                     placeholder="Your full name"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                   <Input 
                     type="email"
                     required
-                    className="bg-gray-800/50 border-gray-600 text-white"
+                    className="border-gray-300"
                     placeholder="your.email@example.com"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                   <Input 
                     type="tel"
                     required
-                    className="bg-gray-800/50 border-gray-600 text-white"
+                    className="border-gray-300"
                     placeholder="+1 (555) 123-4567"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Preferred Date</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
                   <Input 
                     type="date"
                     required
-                    className="bg-gray-800/50 border-gray-600 text-white"
+                    className="border-gray-300"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Number of Travelers</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Number of Travelers</label>
                   <Input 
                     type="number"
                     min="1"
                     defaultValue="2"
                     required
-                    className="bg-gray-800/50 border-gray-600 text-white"
+                    className="border-gray-300"
                   />
                 </div>
                 
@@ -506,7 +549,7 @@ const Index = () => {
                     type="button"
                     variant="outline"
                     onClick={() => setShowBookingModal(false)}
-                    className="flex-1 border-gray-600 text-gray-400 hover:bg-gray-800"
+                    className="flex-1"
                   >
                     Cancel
                   </Button>
