@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -35,7 +34,7 @@ const destinations = {
     name: 'Victoria Falls',
     tagline: 'The Smoke That Thunders',
     videoUrl: 'https://player.vimeo.com/external/342394285.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
     unesco: true,
     usp: 'One of the Seven Natural Wonders of the World',
     bestSeason: 'Peak flow: March - May | Dry season: June - November',
@@ -59,7 +58,7 @@ const destinations = {
       budget: ["Victoria Falls Backpackers"]
     },
     gallery: [
-      'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+      '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
       'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
@@ -71,7 +70,7 @@ const destinations = {
     name: 'Hwange National Park',
     tagline: 'Giants of the Savanna',
     videoUrl: 'https://player.vimeo.com/external/elephants.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/bc57d6ad-4055-4d57-9112-57f8c856f2e8.png',
     unesco: false,
     usp: 'Home to one of Africa\'s largest elephant populations (40,000+)',
     bestSeason: 'Dry season: May - October',
@@ -95,7 +94,7 @@ const destinations = {
       budget: ["Sable Sands"]
     },
     gallery: [
-      'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
+      '/lovable-uploads/bc57d6ad-4055-4d57-9112-57f8c856f2e8.png',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
@@ -107,7 +106,7 @@ const destinations = {
     name: 'Great Zimbabwe',
     tagline: 'Ancient African Kingdom',
     videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/f5b7c9ff-098f-4495-ac5d-011d1dfce65f.png',
     unesco: true,
     usp: 'Largest ancient structure south of the Sahara Desert',
     bestSeason: 'Cool season: April - August',
@@ -130,7 +129,7 @@ const destinations = {
       budget: ["Local guesthouses"]
     },
     gallery: [
-      'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
+      '/lovable-uploads/f5b7c9ff-098f-4495-ac5d-011d1dfce65f.png',
       'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
@@ -141,7 +140,7 @@ const destinations = {
     name: 'Mana Pools National Park',
     tagline: 'Pristine Wilderness Paradise',
     videoUrl: 'https://player.vimeo.com/external/mana.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/b3711832-269a-472f-b0f3-f0af5a0e0f43.png',
     unesco: true,
     usp: 'UNESCO World Heritage Site with no fences - pristine wilderness',
     bestSeason: 'Dry season: May - October',
@@ -164,7 +163,7 @@ const destinations = {
       budget: ["Wilderness camping"]
     },
     gallery: [
-      'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=800&h=600&fit=crop',
+      '/lovable-uploads/b3711832-269a-472f-b0f3-f0af5a0e0f43.png',
       'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
@@ -175,7 +174,7 @@ const destinations = {
     name: 'Eastern Highlands',
     tagline: 'Misty Mountains & Tea Plantations',
     videoUrl: 'https://player.vimeo.com/external/highlands.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/e1646cba-0cda-4d34-a90f-a3cd73555f04.png',
     unesco: false,
     usp: 'Zimbabwe\'s highest peak and misty rainforests',
     bestSeason: 'Year-round: April - September ideal',
@@ -198,7 +197,7 @@ const destinations = {
       budget: ["Mountain lodges"]
     },
     gallery: [
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+      '/lovable-uploads/e1646cba-0cda-4d34-a90f-a3cd73555f04.png',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
@@ -209,7 +208,7 @@ const destinations = {
     name: 'Matobo Hills',
     tagline: 'Ancient Stone Sanctuary',
     videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/99d20328-4c15-485a-b03a-79ccbf64477a.png',
     unesco: true,
     usp: 'Largest concentration of rock art in Southern Africa',
     bestSeason: 'Cool season: April - August',
@@ -232,7 +231,7 @@ const destinations = {
       budget: ["Camp Amalinda"]
     },
     gallery: [
-      'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
+      '/lovable-uploads/99d20328-4c15-485a-b03a-79ccbf64477a.png',
       'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
