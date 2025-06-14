@@ -435,7 +435,7 @@ const DestinationPage = () => {
                         if (key !== 'name' && key !== 'description') {
                           return (
                             <Badge key={key} variant="outline" className="mr-2">
-                              {key}: {value}
+                              {key}: {String(value)}
                             </Badge>
                           );
                         }
