@@ -3,8 +3,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Star, Calendar, Users } from "lucide-react";
+import { Search, MapPin, Star, Calendar, Users, ArrowRight, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import AITravelConcierge from "@/components/AITravelConcierge";
+import SafetyToolkit from "@/components/SafetyToolkit";
+import Interactive3DGlobe from "@/components/Interactive3DGlobe";
+import BookingEngine from "@/components/BookingEngine";
 
 const destinations = [
   {
@@ -80,6 +84,7 @@ const categories = ["All", "Natural Wonder", "Historical", "Wildlife", "Adventur
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeSection, setActiveSection] = useState<'explore' | 'booking' | 'globe'>('explore');
 
   const filteredDestinations = destinations.filter(dest => {
     const matchesCategory = selectedCategory === "All" || dest.category === selectedCategory;
@@ -89,138 +94,239 @@ const Index = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
+      {/* Animated Background Particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-orange-500/30 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Safety Toolkit */}
+      <SafetyToolkit />
+
+      {/* AI Travel Concierge */}
+      <AITravelConcierge />
+
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
+      <div className="relative bg-gradient-to-r from-orange-900/90 via-red-900/90 to-pink-900/90 text-white">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=1080&fit=crop')] bg-cover bg-center opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80"></div>
+        <div className="relative max-w-7xl mx-auto px-4 py-32 sm:px-6 lg:px-8">
           <div className="text-center animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-200 to-orange-100 bg-clip-text text-transparent">
-              Discover Zimbabwe
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-orange-100 max-w-3xl mx-auto">
-              Explore the heart of Africa through breathtaking landscapes, rich culture, and unforgettable adventures
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <Sparkles className="h-8 w-8 text-yellow-400 animate-pulse" />
+              <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-yellow-200 via-orange-300 to-red-300 bg-clip-text text-transparent">
+                Zimbabwe
+              </h1>
+              <Sparkles className="h-8 w-8 text-yellow-400 animate-pulse" />
+            </div>
+            <p className="text-2xl md:text-3xl mb-8 text-orange-100 max-w-4xl mx-auto font-light">
+              Experience Africa's hidden gem through <span className="text-yellow-300 font-semibold">AI-powered exploration</span>, 
+              <span className="text-blue-300 font-semibold"> AR adventures</span>, and 
+              <span className="text-green-300 font-semibold"> immersive experiences</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-3 text-lg font-semibold">
-                Start Exploring
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-8 py-4 text-lg font-semibold shadow-2xl hover:scale-105 transition-all duration-300"
+              >
+                <Sparkles className="h-5 w-5 mr-2" />
+                Start AR Adventure
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-3 text-lg font-semibold">
-                Plan Your Trip
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-2 border-orange-400 text-orange-400 hover:bg-orange-400/10 px-8 py-4 text-lg font-semibold backdrop-blur-sm hover:scale-105 transition-all duration-300"
+              >
+                Explore with AI Guide
+                <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Search and Filter Section */}
+      {/* Navigation Tabs */}
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-lg p-6 -mt-10 relative z-10 border border-orange-100">
-          <div className="flex flex-col lg:flex-row gap-4 items-center">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-              <Input
-                placeholder="Search destinations, activities..."
-                className="pl-10 h-12 text-lg border-gray-200 focus:border-orange-500 focus:ring-orange-500"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <div className="flex gap-2 flex-wrap">
-              {categories.map((category) => (
+        <div className="flex justify-center mb-8">
+          <div className="bg-black/90 backdrop-blur-xl rounded-2xl p-2 border border-orange-500/30">
+            <div className="flex gap-2">
+              {[
+                { id: 'explore', label: 'Explore Destinations', icon: Search },
+                { id: 'globe', label: '3D Globe View', icon: MapPin },
+                { id: 'booking', label: 'Book Experiences', icon: Calendar }
+              ].map((tab) => (
                 <Button
-                  key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
-                  onClick={() => setSelectedCategory(category)}
-                  className={selectedCategory === category 
-                    ? "bg-orange-600 hover:bg-orange-700" 
-                    : "border-orange-200 text-orange-700 hover:bg-orange-50"
-                  }
+                  key={tab.id}
+                  onClick={() => setActiveSection(tab.id as any)}
+                  variant={activeSection === tab.id ? 'default' : 'ghost'}
+                  className={`px-6 py-3 ${
+                    activeSection === tab.id
+                      ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
+                      : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                  }`}
                 >
-                  {category}
+                  <tab.icon className="h-4 w-4 mr-2" />
+                  {tab.label}
                 </Button>
               ))}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Destinations Grid */}
-      <div className="max-w-7xl mx-auto px-4 pb-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredDestinations.map((destination, index) => (
-            <Card key={destination.id} className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 bg-white/80 backdrop-blur-sm">
-              <div className="relative overflow-hidden">
-                <img
-                  src={destination.image}
-                  alt={destination.name}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute top-4 left-4">
-                  <Badge className="bg-orange-600 hover:bg-orange-700 text-white">
-                    {destination.category}
-                  </Badge>
+        {/* 3D Globe Section */}
+        {activeSection === 'globe' && (
+          <div className="flex justify-center mb-8">
+            <Interactive3DGlobe />
+          </div>
+        )}
+
+        {/* Booking Engine Section */}
+        {activeSection === 'booking' && (
+          <BookingEngine />
+        )}
+
+        {/* Explore Destinations Section */}
+        {activeSection === 'explore' && (
+          <>
+            {/* Search and Filter Section */}
+            <div className="bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl p-6 -mt-10 relative z-10 border border-orange-500/30 mb-8">
+              <div className="flex flex-col lg:flex-row gap-4 items-center">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-3 h-5 w-5 text-orange-400" />
+                  <Input
+                    placeholder="Search destinations, experiences, adventures..."
+                    className="pl-10 h-12 text-lg bg-gray-800/50 border-orange-500/30 text-white placeholder:text-gray-400 focus:border-orange-500 focus:ring-orange-500/50"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
                 </div>
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span className="text-sm font-semibold">{destination.rating}</span>
+                <div className="flex gap-2 flex-wrap">
+                  {categories.map((category) => (
+                    <Button
+                      key={category}
+                      variant={selectedCategory === category ? "default" : "outline"}
+                      onClick={() => setSelectedCategory(category)}
+                      className={selectedCategory === category 
+                        ? "bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 shadow-lg" 
+                        : "border-orange-500/30 text-orange-400 hover:bg-orange-500/20 backdrop-blur-sm"
+                      }
+                    >
+                      {category}
+                    </Button>
+                  ))}
                 </div>
               </div>
-              <CardContent className="p-6">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{destination.name}</h3>
-                    <div className="flex items-center text-gray-600 mb-2">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      <span className="text-sm">{destination.location}</span>
+            </div>
+
+            {/* Destinations Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredDestinations.map((destination, index) => (
+                <Card 
+                  key={destination.id} 
+                  className="group overflow-hidden border-0 shadow-2xl hover:shadow-orange-500/25 transition-all duration-700 hover:scale-105 bg-black/90 backdrop-blur-xl border border-orange-500/20 hover:border-orange-500/50"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={destination.image}
+                      alt={destination.name}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div className="absolute top-4 left-4">
+                      <Badge className="bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg">
+                        {destination.category}
+                      </Badge>
                     </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">{destination.description}</p>
+                    <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1 border border-orange-500/30">
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <span className="text-sm font-semibold text-white">{destination.rating}</span>
+                    </div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-2xl font-bold text-white mb-1">{destination.name}</h3>
+                      <div className="flex items-center text-orange-300">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        <span className="text-sm">{destination.location}</span>
+                      </div>
+                    </div>
                   </div>
                   
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
-                    <div className="flex items-center gap-1">
-                      <Users className="h-4 w-4" />
-                      <span>{destination.reviews} reviews</span>
-                    </div>
-                  </div>
+                  <CardContent className="p-6 bg-gradient-to-b from-gray-900 to-black">
+                    <div className="space-y-4">
+                      <p className="text-gray-300 text-sm leading-relaxed">{destination.description}</p>
+                      
+                      <div className="flex items-center gap-4 text-sm text-gray-400">
+                        <div className="flex items-center gap-1">
+                          <Users className="h-4 w-4" />
+                          <span>{destination.reviews} reviews</span>
+                        </div>
+                      </div>
 
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-900">Popular Activities:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {destination.activities.map((activity, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs bg-orange-100 text-orange-800">
-                          {activity}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-orange-300">Popular Activities:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {destination.activities.map((activity, idx) => (
+                            <Badge key={idx} variant="secondary" className="text-xs bg-orange-500/20 text-orange-300 border border-orange-500/30">
+                              {activity}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
 
-                  <div className="flex gap-2 pt-2">
-                    <Button className="flex-1 bg-orange-600 hover:bg-orange-700">
-                      View Details
-                    </Button>
-                    <Button variant="outline" className="border-orange-200 text-orange-700 hover:bg-orange-50">
-                      <Calendar className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                      <div className="flex gap-2 pt-2">
+                        <Button className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 shadow-lg">
+                          Launch AR View
+                        </Button>
+                        <Button variant="outline" className="border-orange-500/30 text-orange-400 hover:bg-orange-500/20">
+                          <Calendar className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Call to Action */}
-      <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-16">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl font-bold mb-6">Ready for Your Zimbabwe Adventure?</h2>
-          <p className="text-xl mb-8 text-orange-100">Join thousands of travelers who have discovered the magic of Zimbabwe</p>
+      {/* Enhanced Call to Action */}
+      <div className="bg-gradient-to-r from-orange-900 via-red-900 to-pink-900 text-white py-20 mt-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=1920&h=600&fit=crop')] bg-cover bg-center opacity-20"></div>
+        <div className="relative max-w-4xl mx-auto text-center px-4">
+          <Sparkles className="h-12 w-12 text-yellow-400 mx-auto mb-6 animate-pulse" />
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
+            Ready for Your AI-Powered Zimbabwe Adventure?
+          </h2>
+          <p className="text-xl mb-8 text-orange-100 max-w-2xl mx-auto">
+            Join thousands of travelers discovering Zimbabwe through cutting-edge AR experiences, AI-guided tours, and seamless booking
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-3 text-lg font-semibold">
-              Download App
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 px-8 py-4 text-lg font-semibold text-black shadow-2xl hover:scale-105 transition-all duration-300"
+            >
+              <Sparkles className="h-5 w-5 mr-2" />
+              Download AI Travel App
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-3 text-lg font-semibold">
-              Contact Guide
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-2 border-orange-400 text-orange-400 hover:bg-orange-400/10 px-8 py-4 text-lg font-semibold backdrop-blur-sm hover:scale-105 transition-all duration-300"
+            >
+              Contact AR Guide
+              <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
           </div>
         </div>
