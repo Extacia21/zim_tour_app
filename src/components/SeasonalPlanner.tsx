@@ -271,7 +271,7 @@ const SeasonalPlanner = () => {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <Droplets className="h-4 w-4 text-blue-400" />
-                    <Badge className={getFlowColor(month.waterfallFlow)} size="sm">
+                    <Badge className={getFlowColor(month.waterfallFlow)}>
                       {month.waterfallFlow} Flow
                     </Badge>
                   </div>
