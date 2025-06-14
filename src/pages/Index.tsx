@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Search, 
   MapPin, 
@@ -15,7 +16,8 @@ import {
   Mail,
   Globe,
   Clock,
-  Heart
+  Heart,
+  X
 } from "lucide-react";
 
 const destinations = [
@@ -66,6 +68,30 @@ const destinations = [
     category: "Adventure",
     price: "$320",
     duration: "3 Days"
+  },
+  {
+    id: 5,
+    name: "Eastern Highlands",
+    location: "Manicaland Province",
+    rating: 4.6,
+    reviews: 1456,
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+    description: "Scenic mountains and cool climate retreat",
+    category: "Natural Wonder",
+    price: "$200",
+    duration: "2 Days"
+  },
+  {
+    id: 6,
+    name: "Matobo Hills",
+    location: "Bulawayo",
+    rating: 4.5,
+    reviews: 892,
+    image: "https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop",
+    description: "Ancient rock formations and cultural heritage",
+    category: "Historical",
+    price: "$150",
+    duration: "Full Day"
   }
 ];
 
@@ -74,13 +100,54 @@ const categories = ["All", "Natural Wonder", "Historical", "Wildlife", "Adventur
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [favoriteDestinations, setFavoriteDestinations] = useState<number[]>([]);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [selectedDestination, setSelectedDestination] = useState<typeof destinations[0] | null>(null);
+  const { toast } = useToast();
 
   const filteredDestinations = destinations.filter(dest => {
     const matchesCategory = selectedCategory === "All" || dest.category === selectedCategory;
     const matchesSearch = dest.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         dest.location.toLowerCase().includes(searchTerm.toLowerCase());
+                         dest.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         dest.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  const toggleFavorite = (destinationId: number) => {
+    setFavoriteDestinations(prev => 
+      prev.includes(destinationId) 
+        ? prev.filter(id => id !== destinationId)
+        : [...prev, destinationId]
+    );
+    
+    toast({
+      title: favoriteDestinations.includes(destinationId) ? "Removed from favorites" : "Added to favorites",
+      description: "Check your favorites list to see saved destinations",
+    });
+  };
+
+  const handleBookNow = (destination: typeof destinations[0]) => {
+    setSelectedDestination(destination);
+    setShowBookingModal(true);
+  };
+
+  const handleBookingSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowBookingModal(false);
+    toast({
+      title: "Booking Request Sent!",
+      description: `We'll contact you soon about your ${selectedDestination?.name} trip.`,
+    });
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800">
@@ -96,13 +163,30 @@ const Index = () => {
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#destinations" className="text-gray-300 hover:text-orange-400 transition-colors">Destinations</a>
-              <a href="#tours" className="text-gray-300 hover:text-orange-400 transition-colors">Tours</a>
-              <a href="#hotels" className="text-gray-300 hover:text-orange-400 transition-colors">Hotels</a>
-              <a href="#contact" className="text-gray-300 hover:text-orange-400 transition-colors">Contact</a>
+              <button 
+                onClick={() => scrollToSection('destinations')}
+                className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer"
+              >
+                Destinations
+              </button>
+              <button 
+                onClick={() => scrollToSection('features')}
+                className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer"
+              >
+                Tours
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="text-gray-300 hover:text-orange-400 transition-colors cursor-pointer"
+              >
+                Contact
+              </button>
             </div>
             
-            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
+            <Button 
+              onClick={() => scrollToSection('contact')}
+              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+            >
               Book Now
             </Button>
           </div>
@@ -121,10 +205,19 @@ const Index = () => {
             Experience the natural wonders, rich culture, and incredible wildlife of Zimbabwe with our expertly crafted tours
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 text-lg">
+            <Button 
+              size="lg" 
+              onClick={() => scrollToSection('destinations')}
+              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 text-lg"
+            >
               Explore Destinations
             </Button>
-            <Button size="lg" variant="outline" className="border-orange-400 text-orange-400 hover:bg-orange-400/10 px-8 py-4 text-lg">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              onClick={() => scrollToSection('features')}
+              className="border-orange-400 text-orange-400 hover:bg-orange-400/10 px-8 py-4 text-lg"
+            >
               View Tours
             </Button>
           </div>
@@ -139,10 +232,18 @@ const Index = () => {
               <Search className="absolute left-3 top-3 h-5 w-5 text-orange-400" />
               <Input
                 placeholder="Search destinations..."
-                className="pl-10 h-12 text-lg bg-gray-800/50 border-orange-500/30 text-white placeholder:text-gray-400 focus:border-orange-500"
+                className="pl-10 pr-10 h-12 text-lg bg-gray-800/50 border-orange-500/30 text-white placeholder:text-gray-400 focus:border-orange-500"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
+              {searchTerm && (
+                <button
+                  onClick={clearSearch}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-white"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              )}
             </div>
             <div className="flex gap-2 flex-wrap">
               {categories.map((category) => (
@@ -160,7 +261,33 @@ const Index = () => {
               ))}
             </div>
           </div>
+          
+          {filteredDestinations.length === 0 && (
+            <div className="text-center py-8">
+              <p className="text-gray-400">No destinations found matching your search criteria.</p>
+              <Button 
+                onClick={() => {
+                  setSearchTerm("");
+                  setSelectedCategory("All");
+                }}
+                className="mt-4 bg-orange-600 hover:bg-orange-700"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
         </div>
+
+        {/* Results Summary */}
+        {filteredDestinations.length > 0 && (
+          <div className="mb-6 text-center">
+            <p className="text-gray-300">
+              Showing {filteredDestinations.length} destination{filteredDestinations.length !== 1 ? 's' : ''}
+              {selectedCategory !== "All" && ` in ${selectedCategory}`}
+              {searchTerm && ` matching "${searchTerm}"`}
+            </p>
+          </div>
+        )}
 
         {/* Destinations Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -185,8 +312,17 @@ const Index = () => {
                   <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                   <span className="text-xs font-semibold text-white">{destination.rating}</span>
                 </div>
-                <button className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm rounded-full p-2 text-white hover:bg-orange-500/80 transition-colors">
-                  <Heart className="h-4 w-4" />
+                <button 
+                  onClick={() => toggleFavorite(destination.id)}
+                  className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm rounded-full p-2 text-white hover:bg-orange-500/80 transition-colors"
+                >
+                  <Heart 
+                    className={`h-4 w-4 ${
+                      favoriteDestinations.includes(destination.id) 
+                        ? 'fill-red-500 text-red-500' 
+                        : 'text-white'
+                    }`} 
+                  />
                 </button>
               </div>
               
@@ -211,7 +347,11 @@ const Index = () => {
 
                 <div className="flex items-center justify-between">
                   <div className="text-orange-400 font-bold">{destination.price}</div>
-                  <Button size="sm" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700">
+                  <Button 
+                    size="sm" 
+                    onClick={() => handleBookNow(destination)}
+                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
+                  >
                     Book Now
                   </Button>
                 </div>
@@ -222,7 +362,7 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="bg-gradient-to-r from-orange-900/20 to-red-900/20 py-16">
+      <section id="features" className="bg-gradient-to-r from-orange-900/20 to-red-900/20 py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">Why Choose Zimbabwe Wanderlust?</h2>
@@ -232,19 +372,19 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center">
+            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center hover:border-orange-500/50 transition-colors">
               <Camera className="h-12 w-12 text-orange-400 mx-auto mb-4" />
               <h3 className="text-white font-bold mb-2">Expert Photography</h3>
               <p className="text-gray-300 text-sm">Capture stunning memories with our professional photography services</p>
             </Card>
             
-            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center">
+            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center hover:border-orange-500/50 transition-colors">
               <Users className="h-12 w-12 text-orange-400 mx-auto mb-4" />
               <h3 className="text-white font-bold mb-2">Local Guides</h3>
               <p className="text-gray-300 text-sm">Learn from passionate locals who know every hidden gem</p>
             </Card>
             
-            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center">
+            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center hover:border-orange-500/50 transition-colors">
               <Star className="h-12 w-12 text-orange-400 mx-auto mb-4" />
               <h3 className="text-white font-bold mb-2">5-Star Service</h3>
               <p className="text-gray-300 text-sm">Luxury accommodations and premium service throughout your journey</p>
@@ -271,7 +411,11 @@ const Index = () => {
               <span>Zimbabwe</span>
             </div>
           </div>
-          <Button size="lg" className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 text-lg">
+          <Button 
+            size="lg" 
+            onClick={() => setShowBookingModal(true)}
+            className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 text-lg"
+          >
             <Calendar className="h-5 w-5 mr-2" />
             Plan Your Trip
           </Button>
@@ -289,6 +433,95 @@ const Index = () => {
           </p>
         </div>
       </footer>
+
+      {/* Booking Modal */}
+      {showBookingModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="bg-black/95 backdrop-blur-xl border border-orange-500/30 max-w-md w-full">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold text-white">
+                  {selectedDestination ? `Book ${selectedDestination.name}` : 'Plan Your Trip'}
+                </h3>
+                <button
+                  onClick={() => setShowBookingModal(false)}
+                  className="text-gray-400 hover:text-white"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <form onSubmit={handleBookingSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                  <Input 
+                    required
+                    className="bg-gray-800/50 border-gray-600 text-white"
+                    placeholder="Your full name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                  <Input 
+                    type="email"
+                    required
+                    className="bg-gray-800/50 border-gray-600 text-white"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+                  <Input 
+                    type="tel"
+                    required
+                    className="bg-gray-800/50 border-gray-600 text-white"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Preferred Date</label>
+                  <Input 
+                    type="date"
+                    required
+                    className="bg-gray-800/50 border-gray-600 text-white"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Number of Travelers</label>
+                  <Input 
+                    type="number"
+                    min="1"
+                    defaultValue="2"
+                    required
+                    className="bg-gray-800/50 border-gray-600 text-white"
+                  />
+                </div>
+                
+                <div className="flex gap-3 pt-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setShowBookingModal(false)}
+                    className="flex-1 border-gray-600 text-gray-400 hover:bg-gray-800"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
+                  >
+                    Send Request
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };
