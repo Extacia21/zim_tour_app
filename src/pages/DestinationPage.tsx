@@ -35,16 +35,18 @@ const destinations = {
     name: 'Victoria Falls',
     tagline: 'The Smoke That Thunders',
     videoUrl: 'https://player.vimeo.com/external/342394285.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/e1646cba-0cda-4d34-a90f-a3cd73555f04.png',
     unesco: true,
     usp: 'One of the Seven Natural Wonders of the World',
     bestSeason: 'Peak flow: March - May | Dry season: June - November',
     temperature: '20-30°C',
-    description: 'Experience the raw power of one of the Seven Natural Wonders of the World. Victoria Falls is a spectacular sight of awe-inspiring beauty and grandeur on the Zambezi River.',
+    description: 'Experience the raw power of one of the Seven Natural Wonders of the World. Victoria Falls is a spectacular sight of awe-inspiring beauty and grandeur on the Zambezi River, where the thundering waters create a mist that can be seen from miles away.',
     topActivities: [
       { name: "Devil's Pool Swimming", description: "Swimming at the edge of the falls (seasonal)", season: "September - December" },
       { name: "White-water Rafting", description: "Grade 5 rapids on the Zambezi River", difficulty: "Extreme" },
-      { name: "Bungee Jumping", description: "111m jump off Victoria Falls Bridge", height: "111m" }
+      { name: "Bungee Jumping", description: "111m jump off Victoria Falls Bridge", height: "111m" },
+      { name: "Helicopter Sunset Cruises", description: "Aerial views over the Zambezi River", experience: "Scenic flights" },
+      { name: "Rhino Walking Safaris", description: "In nearby Mosi-oa-Tunya National Park", wildlife: "Rhino encounters" }
     ],
     uniqueFeatures: [
       "Lunar Rainbow viewing on full moon nights",
@@ -57,7 +59,7 @@ const destinations = {
       budget: ["Victoria Falls Backpackers"]
     },
     gallery: [
-      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop',
+      '/lovable-uploads/e1646cba-0cda-4d34-a90f-a3cd73555f04.png',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
@@ -69,16 +71,18 @@ const destinations = {
     name: 'Hwange National Park',
     tagline: 'Giants of the Savanna',
     videoUrl: 'https://player.vimeo.com/external/elephants.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/b3711832-269a-472f-b0f3-f0af5a0e0f43.png',
     unesco: false,
     usp: 'Home to one of Africa\'s largest elephant populations (40,000+)',
     bestSeason: 'Dry season: May - October',
     temperature: '15-35°C',
-    description: 'Zimbabwe\'s largest national park with diverse wildlife including the largest elephant population in Africa. Experience incredible game viewing and pristine wilderness.',
+    description: 'Zimbabwe\'s largest national park with diverse wildlife including the largest elephant population in Africa. Experience incredible game viewing and pristine wilderness across diverse ecosystems from grasslands to woodlands.',
     topActivities: [
       { name: "Big 5 Game Drives", description: "Spot elephants, lions, leopards, rhinos, and buffalo", bestTime: "Early morning & evening" },
       { name: "Guided Walking Safaris", description: "Close encounters with wildlife on foot", difficulty: "Moderate" },
-      { name: "Waterhole Photography", description: "Hide photography at Ngweshla & Nyamandhlovu", species: "400+ bird species" }
+      { name: "Waterhole Photography", description: "Hide photography at Ngweshla & Nyamandhlovu", species: "400+ bird species" },
+      { name: "Birdwatching", description: "Over 400 bird species recorded", habitat: "Diverse ecosystems" },
+      { name: "Cultural Village Visits", description: "Near Dete village", culture: "Local communities" }
     ],
     uniqueFeatures: [
       "One of Africa's largest elephant populations",
@@ -91,28 +95,29 @@ const destinations = {
       budget: ["Sable Sands"]
     },
     gallery: [
+      '/lovable-uploads/b3711832-269a-472f-b0f3-f0af5a0e0f43.png',
       'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
     ]
   },
   'great-zimbabwe': {
     name: 'Great Zimbabwe',
     tagline: 'Ancient African Kingdom',
     videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/f5b7c9ff-098f-4495-ac5d-011d1dfce65f.png',
     unesco: true,
     usp: 'Largest ancient structure south of the Sahara Desert',
     bestSeason: 'Cool season: April - August',
     temperature: '15-28°C',
-    description: 'The ancient stone city that gave Zimbabwe its name. These magnificent ruins represent medieval stone architecture from the 11th-14th century.',
+    description: 'The ancient stone city that gave Zimbabwe its name. These magnificent ruins represent medieval stone architecture from the 11th-14th century, showcasing the sophisticated engineering and cultural achievements of ancient African civilizations.',
     topActivities: [
       { name: "Archaeological Tours", description: "Explore ancient city ruins with expert guides", period: "11th-14th century" },
       { name: "Hill Complex Hikes", description: "Panoramic views from the ancient fortress", elevation: "High vantage point" },
-      { name: "Cultural Performances", description: "Traditional Shona dance demonstrations", culture: "Shona heritage" }
+      { name: "Cultural Performances", description: "Traditional Shona dance demonstrations", culture: "Shona heritage" },
+      { name: "Birdwatching", description: "African fish eagles and other species", habitat: "Ancient ruins" }
     ],
     uniqueFeatures: [
       "UNESCO World Heritage Site",
@@ -125,28 +130,29 @@ const destinations = {
       budget: ["Local guesthouses"]
     },
     gallery: [
+      '/lovable-uploads/f5b7c9ff-098f-4495-ac5d-011d1dfce65f.png',
       'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop'
     ]
   },
   'mana-pools': {
     name: 'Mana Pools National Park',
     tagline: 'Pristine Wilderness Paradise',
     videoUrl: 'https://player.vimeo.com/external/mana.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/99d20328-4c15-485a-b03a-79ccbf64477a.png',
     unesco: true,
     usp: 'UNESCO World Heritage Site with no fences - pristine wilderness',
     bestSeason: 'Dry season: May - October',
     temperature: '18-32°C',
-    description: 'A UNESCO World Heritage Site known for its pristine wilderness, incredible wildlife, and the mighty Zambezi River. Famous for walking safaris and canoeing adventures.',
+    description: 'A UNESCO World Heritage Site known for its pristine wilderness, incredible wildlife, and the mighty Zambezi River. Famous for walking safaris and canoeing adventures in one of Africa\'s most untouched landscapes.',
     topActivities: [
       { name: "Canoe Safaris", description: "Navigate the Zambezi River among wildlife", river: "Zambezi River" },
       { name: "Walking Safaris", description: "Big 5 encounters on foot in pristine wilderness", experience: "No fences" },
-      { name: "Tiger Fishing", description: "Fish for tigerfish and bream in the Zambezi", species: "Tigerfish & bream" }
+      { name: "Tiger Fishing", description: "Fish for tigerfish and bream in the Zambezi", species: "Tigerfish & bream" },
+      { name: "Photography", description: "Floodplains photography with elephants", subject: "Wildlife & landscapes" }
     ],
     uniqueFeatures: [
       "Pristine wilderness with no fences",
@@ -159,28 +165,29 @@ const destinations = {
       budget: ["Wilderness camping"]
     },
     gallery: [
+      '/lovable-uploads/99d20328-4c15-485a-b03a-79ccbf64477a.png',
       'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop'
     ]
   },
   'eastern-highlands': {
     name: 'Eastern Highlands',
     tagline: 'Misty Mountains & Tea Plantations',
     videoUrl: 'https://player.vimeo.com/external/highlands.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/bc57d6ad-4055-4d57-9112-57f8c856f2e8.png',
     unesco: false,
     usp: 'Zimbabwe\'s highest peak and misty rainforests',
     bestSeason: 'Year-round: April - September ideal',
     temperature: '10-25°C',
-    description: 'Experience the cool mountain climate, mist-covered peaks, and rolling tea plantations of Zimbabwe\'s Eastern Highlands including Nyanga, Bvumba, and Chimanimani.',
+    description: 'Experience the cool mountain climate, mist-covered peaks, and rolling tea plantations of Zimbabwe\'s Eastern Highlands including Nyanga, Bvumba, and Chimanimani. A refreshing contrast to the country\'s lowland regions.',
     topActivities: [
       { name: "Mount Nyangani Hiking", description: "Climb Zimbabwe's highest peak (2,592m)", elevation: "2,592m" },
       { name: "Coffee Plantation Tours", description: "Visit coffee farms in the Bvumba Mountains", region: "Bvumba Mountains" },
-      { name: "Mtarazi Falls Visit", description: "Zimbabwe's tallest waterfall", height: "762m" }
+      { name: "Mtarazi Falls Visit", description: "Zimbabwe's tallest waterfall", height: "762m" },
+      { name: "Trout Fishing", description: "In highland dams and streams", species: "Rainbow & brown trout" }
     ],
     uniqueFeatures: [
       "Mount Nyangani - Zimbabwe's highest peak",
@@ -193,28 +200,29 @@ const destinations = {
       budget: ["Mountain lodges"]
     },
     gallery: [
+      '/lovable-uploads/bc57d6ad-4055-4d57-9112-57f8c856f2e8.png',
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
     ]
   },
   'matobo': {
     name: 'Matobo Hills',
     tagline: 'Ancient Stone Sanctuary',
     videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=1920&h=1080&fit=crop',
+    backgroundImage: '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
     unesco: true,
     usp: 'Largest concentration of rock art in Southern Africa',
     bestSeason: 'Cool season: April - August',
     temperature: '12-28°C',
-    description: 'Ancient granite formations and spiritual heritage with thousands of years of rock art. Home to rhino tracking and Cecil Rhodes\' grave.',
+    description: 'Ancient granite formations and spiritual heritage with thousands of years of rock art. Home to rhino tracking and Cecil Rhodes\' grave, the Matobo Hills represent one of Zimbabwe\'s most sacred and historically significant landscapes.',
     topActivities: [
       { name: "Rhino Tracking", description: "Track black and white rhinos on foot", species: "Black & white rhinos" },
       { name: "Rock Art Tours", description: "Ancient San bushmen paintings", age: "2000+ years old" },
-      { name: "Cecil Rhodes Grave", description: "Visit the grave of the colonial pioneer", historical: "World's View" }
+      { name: "Cecil Rhodes Grave", description: "Visit the grave of the colonial pioneer", historical: "World's View" },
+      { name: "Granite Formations", description: "Explore unique balancing rocks", geological: "Ancient granite" }
     ],
     uniqueFeatures: [
       "Largest concentration of rock art in Southern Africa",
@@ -227,12 +235,12 @@ const destinations = {
       budget: ["Camp Amalinda"]
     },
     gallery: [
+      '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
       'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop'
     ]
   }
 };
