@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -14,7 +13,11 @@ import {
   Mountain,
   TreePine,
   Binoculars,
-  Compass
+  Compass,
+  Waves,
+  Fish,
+  Camera as CameraIcon,
+  Crown
 } from 'lucide-react';
 import EnhancedNavigation from '@/components/EnhancedNavigation';
 import EnhancedFooter from '@/components/EnhancedFooter';
@@ -24,7 +27,7 @@ const destinations = [
     name: 'Victoria Falls',
     slug: 'victoria-falls',
     tagline: 'The Smoke That Thunders',
-    image: '/lovable-uploads/e1646cba-0cda-4d34-a90f-a3cd73555f04.png',
+    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
     rating: 4.9,
     reviews: 2847,
     unesco: true,
@@ -35,7 +38,7 @@ const destinations = [
     name: 'Hwange National Park',
     slug: 'hwange',
     tagline: 'Giants of the Savanna',
-    image: '/lovable-uploads/b3711832-269a-472f-b0f3-f0af5a0e0f43.png',
+    image: 'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
     rating: 4.8,
     reviews: 1923,
     unesco: false,
@@ -46,18 +49,18 @@ const destinations = [
     name: 'Great Zimbabwe',
     slug: 'great-zimbabwe',
     tagline: 'Ancient African Kingdom',
-    image: '/lovable-uploads/f5b7c9ff-098f-4495-ac5d-011d1dfce65f.png',
+    image: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
     rating: 4.7,
     reviews: 1456,
     unesco: true,
     description: 'The ancient stone city that gave Zimbabwe its name',
-    icon: Camera
+    icon: Crown
   },
   {
     name: 'Mana Pools',
     slug: 'mana-pools',
     tagline: 'Pristine Wilderness',
-    image: '/lovable-uploads/99d20328-4c15-485a-b03a-79ccbf64477a.png',
+    image: 'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=800&h=600&fit=crop',
     rating: 4.9,
     reviews: 987,
     unesco: true,
@@ -68,7 +71,7 @@ const destinations = [
     name: 'Eastern Highlands',
     slug: 'eastern-highlands',
     tagline: 'Misty Mountains',
-    image: '/lovable-uploads/bc57d6ad-4055-4d57-9112-57f8c856f2e8.png',
+    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
     rating: 4.6,
     reviews: 743,
     unesco: false,
@@ -79,12 +82,78 @@ const destinations = [
     name: 'Matobo Hills',
     slug: 'matobo',
     tagline: 'Stone Sanctuary',
-    image: '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
+    image: 'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
     rating: 4.8,
     reviews: 1234,
     unesco: true,
     description: 'Ancient granite formations and spiritual heritage',
     icon: Compass
+  },
+  {
+    name: 'Lake Kariba',
+    slug: 'lake-kariba',
+    tagline: 'Africa\'s Paradise Lake',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop',
+    rating: 4.7,
+    reviews: 892,
+    unesco: false,
+    description: 'World\'s largest man-made lake by volume',
+    icon: Waves
+  },
+  {
+    name: 'Chinhoyi Caves',
+    slug: 'chinhoyi-caves',
+    tagline: 'Crystal Blue Pools',
+    image: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=800&h=600&fit=crop',
+    rating: 4.5,
+    reviews: 567,
+    unesco: false,
+    description: 'Underground limestone caves with crystal-clear pools',
+    icon: Compass
+  },
+  {
+    name: 'Gonarezhou National Park',
+    slug: 'gonarezhou',
+    tagline: 'Land of the Giants',
+    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+    rating: 4.6,
+    reviews: 421,
+    unesco: false,
+    description: 'Remote wilderness with red cliffs and baobab trees',
+    icon: TreePine
+  },
+  {
+    name: 'Antelope Park',
+    slug: 'antelope-park',
+    tagline: 'Walk with Lions',
+    image: 'https://images.unsplash.com/photo-1544943871-6ad0fc82a69e?w=800&h=600&fit=crop',
+    rating: 4.4,
+    reviews: 678,
+    unesco: false,
+    description: 'Lion conservation and wildlife rehabilitation center',
+    icon: CameraIcon
+  },
+  {
+    name: 'Matusadona National Park',
+    slug: 'matusadona',
+    tagline: 'Kariba\'s Wildlife Haven',
+    image: 'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+    rating: 4.5,
+    reviews: 334,
+    unesco: false,
+    description: 'Game viewing along the shores of Lake Kariba',
+    icon: Fish
+  },
+  {
+    name: 'Chizarira National Park',
+    slug: 'chizarira',
+    tagline: 'Rugged Wilderness',
+    image: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
+    rating: 4.3,
+    reviews: 189,
+    unesco: false,
+    description: 'Remote and rugged landscape with diverse wildlife',
+    icon: Mountain
   }
 ];
 
@@ -187,7 +256,7 @@ const Index = () => {
               <div className="text-white/80 text-sm">Average Rating</div>
             </div>
             <div className="bg-black/60 backdrop-blur-xl rounded-lg px-6 py-3 border border-orange-500/30">
-              <div className="text-2xl font-bold text-orange-400">10k+</div>
+              <div className="text-2xl font-bold text-orange-400">15k+</div>
               <div className="text-white/80 text-sm">Happy Travelers</div>
             </div>
           </div>
@@ -258,7 +327,7 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {destinations.map((destination, index) => {
               const IconComponent = destination.icon;
               return (

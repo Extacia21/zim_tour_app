@@ -35,7 +35,7 @@ const destinations = {
     name: 'Victoria Falls',
     tagline: 'The Smoke That Thunders',
     videoUrl: 'https://player.vimeo.com/external/342394285.hd.mp4',
-    backgroundImage: '/lovable-uploads/e1646cba-0cda-4d34-a90f-a3cd73555f04.png',
+    backgroundImage: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop',
     unesco: true,
     usp: 'One of the Seven Natural Wonders of the World',
     bestSeason: 'Peak flow: March - May | Dry season: June - November',
@@ -59,11 +59,11 @@ const destinations = {
       budget: ["Victoria Falls Backpackers"]
     },
     gallery: [
-      '/lovable-uploads/e1646cba-0cda-4d34-a90f-a3cd73555f04.png',
+      'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=800&h=600&fit=crop'
     ]
   },
@@ -71,7 +71,7 @@ const destinations = {
     name: 'Hwange National Park',
     tagline: 'Giants of the Savanna',
     videoUrl: 'https://player.vimeo.com/external/elephants.hd.mp4',
-    backgroundImage: '/lovable-uploads/b3711832-269a-472f-b0f3-f0af5a0e0f43.png',
+    backgroundImage: 'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=1920&h=1080&fit=crop',
     unesco: false,
     usp: 'Home to one of Africa\'s largest elephant populations (40,000+)',
     bestSeason: 'Dry season: May - October',
@@ -95,19 +95,19 @@ const destinations = {
       budget: ["Sable Sands"]
     },
     gallery: [
-      '/lovable-uploads/b3711832-269a-472f-b0f3-f0af5a0e0f43.png',
       'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=800&h=600&fit=crop'
     ]
   },
   'great-zimbabwe': {
     name: 'Great Zimbabwe',
     tagline: 'Ancient African Kingdom',
     videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
-    backgroundImage: '/lovable-uploads/f5b7c9ff-098f-4495-ac5d-011d1dfce65f.png',
+    backgroundImage: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1920&h=1080&fit=crop',
     unesco: true,
     usp: 'Largest ancient structure south of the Sahara Desert',
     bestSeason: 'Cool season: April - August',
@@ -130,7 +130,6 @@ const destinations = {
       budget: ["Local guesthouses"]
     },
     gallery: [
-      '/lovable-uploads/f5b7c9ff-098f-4495-ac5d-011d1dfce65f.png',
       'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
@@ -142,7 +141,7 @@ const destinations = {
     name: 'Mana Pools National Park',
     tagline: 'Pristine Wilderness Paradise',
     videoUrl: 'https://player.vimeo.com/external/mana.hd.mp4',
-    backgroundImage: '/lovable-uploads/99d20328-4c15-485a-b03a-79ccbf64477a.png',
+    backgroundImage: 'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=1920&h=1080&fit=crop',
     unesco: true,
     usp: 'UNESCO World Heritage Site with no fences - pristine wilderness',
     bestSeason: 'Dry season: May - October',
@@ -165,7 +164,6 @@ const destinations = {
       budget: ["Wilderness camping"]
     },
     gallery: [
-      '/lovable-uploads/99d20328-4c15-485a-b03a-79ccbf64477a.png',
       'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
@@ -177,7 +175,7 @@ const destinations = {
     name: 'Eastern Highlands',
     tagline: 'Misty Mountains & Tea Plantations',
     videoUrl: 'https://player.vimeo.com/external/highlands.hd.mp4',
-    backgroundImage: '/lovable-uploads/bc57d6ad-4055-4d57-9112-57f8c856f2e8.png',
+    backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
     unesco: false,
     usp: 'Zimbabwe\'s highest peak and misty rainforests',
     bestSeason: 'Year-round: April - September ideal',
@@ -200,7 +198,6 @@ const destinations = {
       budget: ["Mountain lodges"]
     },
     gallery: [
-      '/lovable-uploads/bc57d6ad-4055-4d57-9112-57f8c856f2e8.png',
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
@@ -212,7 +209,7 @@ const destinations = {
     name: 'Matobo Hills',
     tagline: 'Ancient Stone Sanctuary',
     videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
-    backgroundImage: '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
+    backgroundImage: 'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=1920&h=1080&fit=crop',
     unesco: true,
     usp: 'Largest concentration of rock art in Southern Africa',
     bestSeason: 'Cool season: April - August',
@@ -235,12 +232,204 @@ const destinations = {
       budget: ["Camp Amalinda"]
     },
     gallery: [
-      '/lovable-uploads/d03937c6-7997-45c8-872a-4b2fa9022a07.png',
       'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop'
+    ]
+  },
+  'lake-kariba': {
+    name: 'Lake Kariba',
+    tagline: 'Africa\'s Paradise Lake',
+    videoUrl: 'https://player.vimeo.com/external/kariba.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&h=1080&fit=crop',
+    unesco: false,
+    usp: 'World\'s largest man-made lake by volume',
+    bestSeason: 'Dry season: April - October',
+    temperature: '20-35°C',
+    description: 'The world\'s largest man-made lake by volume, offering spectacular sunsets, houseboat cruises, and excellent tiger fishing. Lake Kariba is a water paradise surrounded by game-rich shores.',
+    topActivities: [
+      { name: "Houseboat Cruises", description: "Multi-day floating accommodation", experience: "Luxury on water" },
+      { name: "Tiger Fishing", description: "World-class angling for tigerfish", species: "Tigerfish & bream" },
+      { name: "Sunset Deck Parties", description: "Evening entertainment on the water", atmosphere: "Social & scenic" },
+      { name: "Game Viewing", description: "Wildlife along the shoreline", location: "Matusadona National Park" }
+    ],
+    uniqueFeatures: [
+      "World's largest man-made lake by volume",
+      "Kariba Dam wall tours",
+      "Spectacular African sunsets"
+    ],
+    accommodations: {
+      luxury: ["Bumi Hills Safari Lodge"],
+      midRange: ["African Dream Houseboat", "Kalandeka Houseboat"],
+      budget: ["Kariba town accommodation"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop'
+    ]
+  },
+  'chinhoyi-caves': {
+    name: 'Chinhoyi Caves',
+    tagline: 'Crystal Blue Pools',
+    videoUrl: 'https://player.vimeo.com/external/caves.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=1920&h=1080&fit=crop',
+    unesco: false,
+    usp: 'Underground limestone caves with crystal-clear cobalt blue pools',
+    bestSeason: 'Year-round',
+    temperature: '20-30°C',
+    description: 'Underground limestone caves featuring crystal-clear cobalt blue pools. These mystical caves offer cave diving, swimming, and exploration of fascinating geological formations.',
+    topActivities: [
+      { name: "Cave Diving", description: "Underwater exploration in crystal pools", depth: "Up to 50m deep" },
+      { name: "Swimming", description: "In the famous Sleeping Pool", temperature: "Constant 22°C" },
+      { name: "Cave Tours", description: "Guided exploration of limestone formations", geology: "Ancient limestone" },
+      { name: "Photography", description: "Unique underground landscapes", lighting: "Natural cave lighting" }
+    ],
+    uniqueFeatures: [
+      "Crystal-clear cobalt blue pools",
+      "Constant water temperature of 22°C",
+      "Underwater cave systems"
+    ],
+    accommodations: {
+      luxury: ["Orange Grove Farm"],
+      midRange: ["Chinhoyi University Lodge"],
+      budget: ["Local guesthouses"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop'
+    ]
+  },
+  'gonarezhou': {
+    name: 'Gonarezhou National Park',
+    tagline: 'Land of the Giants',
+    videoUrl: 'https://player.vimeo.com/external/gonarezhou.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1920&h=1080&fit=crop',
+    unesco: false,
+    usp: 'Remote wilderness with distinctive red cliffs and giant baobab trees',
+    bestSeason: 'Dry season: April - October',
+    temperature: '18-40°C',
+    description: 'Remote wilderness park famous for its red sandstone cliffs, giant baobab trees, and diverse wildlife. Part of the Great Limpopo Transfrontier Park, it offers an authentic African safari experience.',
+    topActivities: [
+      { name: "Red Cliffs Exploration", description: "Distinctive sandstone formations", geology: "Red sandstone cliffs" },
+      { name: "Baobab Tree Viewing", description: "Ancient giant baobab forests", age: "1000+ years old" },
+      { name: "Game Drives", description: "Elephants, lions, and rare nyala antelope", wildlife: "Big 5 & rare species" },
+      { name: "Bird Watching", description: "Over 400 bird species", habitat: "Diverse ecosystems" }
+    ],
+    uniqueFeatures: [
+      "Distinctive red sandstone cliffs",
+      "Giant baobab trees over 1000 years old",
+      "Part of Great Limpopo Transfrontier Park"
+    ],
+    accommodations: {
+      luxury: ["Singita Pamushana"],
+      midRange: ["Gonarezhou wilderness camps"],
+      budget: ["Camping sites"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+    ]
+  },
+  'antelope-park': {
+    name: 'Antelope Park',
+    tagline: 'Walk with Lions',
+    videoUrl: 'https://player.vimeo.com/external/antelope.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1544943871-6ad0fc82a69e?w=1920&h=1080&fit=crop',
+    unesco: false,
+    usp: 'Unique lion conservation and walking with lions experience',
+    bestSeason: 'Year-round',
+    temperature: '15-35°C',
+    description: 'A wildlife conservation park offering unique experiences including walking with lions, elephant interactions, and conservation education. Focused on wildlife rehabilitation and sustainable tourism.',
+    topActivities: [
+      { name: "Lion Walks", description: "Walk alongside habituated lions", experience: "Unique interaction" },
+      { name: "Elephant Encounters", description: "Close interactions with elephants", conservation: "Rehabilitation" },
+      { name: "Conservation Tours", description: "Learn about wildlife conservation", education: "Conservation focus" },
+      { name: "Game Drives", description: "Traditional safari experience", wildlife: "Diverse species" }
+    ],
+    uniqueFeatures: [
+      "Walk with lions experience",
+      "Elephant interaction programs",
+      "Conservation education focus"
+    ],
+    accommodations: {
+      luxury: ["Antelope Park Resort"],
+      midRange: ["Park accommodation"],
+      budget: ["Camping facilities"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1544943871-6ad0fc82a69e?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop'
+    ]
+  },
+  'matusadona': {
+    name: 'Matusadona National Park',
+    tagline: 'Kariba\'s Wildlife Haven',
+    videoUrl: 'https://player.vimeo.com/external/matusadona.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=1920&h=1080&fit=crop',
+    unesco: false,
+    usp: 'Game viewing along the shores of Lake Kariba',
+    bestSeason: 'Dry season: May - October',
+    temperature: '20-35°C',
+    description: 'Located on the shores of Lake Kariba, this park offers excellent game viewing with elephants often seen swimming between islands. Combines water and land-based safari activities.',
+    topActivities: [
+      { name: "Water-based Game Viewing", description: "Wildlife viewing from boats", unique: "Swimming elephants" },
+      { name: "Island Exploration", description: "Visit islands in Lake Kariba", activity: "Boat excursions" },
+      { name: "Walking Safaris", description: "Guided walks in the park", terrain: "Lakshore wilderness" },
+      { name: "Fishing", description: "Angling in Lake Kariba", species: "Tigerfish & bream" }
+    ],
+    uniqueFeatures: [
+      "Elephants swimming between islands",
+      "Combination of water and land safaris",
+      "Lake Kariba shoreline location"
+    ],
+    accommodations: {
+      luxury: ["Musango Safari Camp"],
+      midRange: ["Spurwing Island Lodge"],
+      budget: ["Camping areas"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop'
+    ]
+  },
+  'chizarira': {
+    name: 'Chizarira National Park',
+    tagline: 'Rugged Wilderness',
+    videoUrl: 'https://player.vimeo.com/external/chizarira.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=1920&h=1080&fit=crop',
+    unesco: false,
+    usp: 'Remote and rugged landscape with diverse wildlife',
+    bestSeason: 'Dry season: May - October',
+    temperature: '15-35°C',
+    description: 'One of Zimbabwe\'s most remote and least visited parks, offering an authentic wilderness experience. The rugged terrain includes escarpments, gorges, and diverse wildlife.',
+    topActivities: [
+      { name: "Wilderness Walking", description: "Multi-day walking safaris", terrain: "Rugged escarpment" },
+      { name: "Escarpment Views", description: "Spectacular viewpoints", elevation: "High vantage points" },
+      { name: "Wildlife Tracking", description: "Spot elephants, buffalo, and predators", experience: "Remote wilderness" },
+      { name: "Gorge Exploration", description: "Explore deep river gorges", geology: "Ancient formations" }
+    ],
+    uniqueFeatures: [
+      "Most remote park in Zimbabwe",
+      "Spectacular escarpment views",
+      "Authentic wilderness experience"
+    ],
+    accommodations: {
+      luxury: ["Wilderness camps"],
+      midRange: ["Basic camps"],
+      budget: ["Wilderness camping"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop'
     ]
   }
 };
