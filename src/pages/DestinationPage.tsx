@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { 
   MapPin, 
@@ -13,7 +14,14 @@ import {
   Play,
   X,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Users,
+  Mountain,
+  TreePine,
+  Binoculars,
+  Compass,
+  Award,
+  Activity
 } from 'lucide-react';
 import EnhancedNavigation from '@/components/EnhancedNavigation';
 import EnhancedFooter from '@/components/EnhancedFooter';
@@ -29,10 +37,25 @@ const destinations = {
     videoUrl: 'https://player.vimeo.com/external/342394285.hd.mp4',
     backgroundImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=1080&fit=crop',
     unesco: true,
-    usp: 'Largest waterfall by volume in the world',
-    bestSeason: 'Peak flow: March - May',
-    temperature: '25-30°C',
-    description: 'Experience the raw power of one of the Seven Natural Wonders of the World. Victoria Falls is a spectacular sight of awe-inspiring beauty and grandeur on the Zambezi River, forming the border between Zambia and Zimbabwe.',
+    usp: 'One of the Seven Natural Wonders of the World',
+    bestSeason: 'Peak flow: March - May | Dry season: June - November',
+    temperature: '20-30°C',
+    description: 'Experience the raw power of one of the Seven Natural Wonders of the World. Victoria Falls is a spectacular sight of awe-inspiring beauty and grandeur on the Zambezi River.',
+    topActivities: [
+      { name: "Devil's Pool Swimming", description: "Swimming at the edge of the falls (seasonal)", season: "September - December" },
+      { name: "White-water Rafting", description: "Grade 5 rapids on the Zambezi River", difficulty: "Extreme" },
+      { name: "Bungee Jumping", description: "111m jump off Victoria Falls Bridge", height: "111m" }
+    ],
+    uniqueFeatures: [
+      "Lunar Rainbow viewing on full moon nights",
+      "Livingstone Island tours at the edge of the Falls",
+      "Helicopter sunset cruises over the Zambezi"
+    ],
+    accommodations: {
+      luxury: ["Victoria Falls Hotel", "Stanley & Livingstone Boutique Hotel"],
+      midRange: ["Ilala Lodge", "A'Zambezi River Lodge"],
+      budget: ["Victoria Falls Backpackers"]
+    },
     gallery: [
       'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
@@ -48,12 +71,129 @@ const destinations = {
     videoUrl: 'https://player.vimeo.com/external/elephants.hd.mp4',
     backgroundImage: 'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=1920&h=1080&fit=crop',
     unesco: false,
-    usp: 'Home to 40,000+ elephants',
+    usp: 'Home to one of Africa\'s largest elephant populations (40,000+)',
     bestSeason: 'Dry season: May - October',
-    temperature: '20-35°C',
+    temperature: '15-35°C',
     description: 'Zimbabwe\'s largest national park with diverse wildlife including the largest elephant population in Africa. Experience incredible game viewing and pristine wilderness.',
+    topActivities: [
+      { name: "Big 5 Game Drives", description: "Spot elephants, lions, leopards, rhinos, and buffalo", bestTime: "Early morning & evening" },
+      { name: "Guided Walking Safaris", description: "Close encounters with wildlife on foot", difficulty: "Moderate" },
+      { name: "Waterhole Photography", description: "Hide photography at Ngweshla & Nyamandhlovu", species: "400+ bird species" }
+    ],
+    uniqueFeatures: [
+      "One of Africa's largest elephant populations",
+      "Rare African wild dog sightings",
+      "Cultural village visits near Dete"
+    ],
+    accommodations: {
+      luxury: ["Singita Pamushana", "The Hide"],
+      midRange: ["Hwange Safari Lodge", "Ivory Lodge"],
+      budget: ["Sable Sands"]
+    },
     gallery: [
       'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=800&h=600&fit=crop'
+    ]
+  },
+  'great-zimbabwe': {
+    name: 'Great Zimbabwe',
+    tagline: 'Ancient African Kingdom',
+    videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1920&h=1080&fit=crop',
+    unesco: true,
+    usp: 'Largest ancient structure south of the Sahara Desert',
+    bestSeason: 'Cool season: April - August',
+    temperature: '15-28°C',
+    description: 'The ancient stone city that gave Zimbabwe its name. These magnificent ruins represent medieval stone architecture from the 11th-14th century.',
+    topActivities: [
+      { name: "Archaeological Tours", description: "Explore ancient city ruins with expert guides", period: "11th-14th century" },
+      { name: "Hill Complex Hikes", description: "Panoramic views from the ancient fortress", elevation: "High vantage point" },
+      { name: "Cultural Performances", description: "Traditional Shona dance demonstrations", culture: "Shona heritage" }
+    ],
+    uniqueFeatures: [
+      "UNESCO World Heritage Site",
+      "Medieval stone architecture without mortar",
+      "African fish eagle sightings"
+    ],
+    accommodations: {
+      luxury: ["Great Zimbabwe Hotel"],
+      midRange: ["Norma Jeane's Lakeview Resort"],
+      budget: ["Local guesthouses"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+    ]
+  },
+  'mana-pools': {
+    name: 'Mana Pools National Park',
+    tagline: 'Pristine Wilderness Paradise',
+    videoUrl: 'https://player.vimeo.com/external/mana.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=1920&h=1080&fit=crop',
+    unesco: true,
+    usp: 'UNESCO World Heritage Site with no fences - pristine wilderness',
+    bestSeason: 'Dry season: May - October',
+    temperature: '18-32°C',
+    description: 'A UNESCO World Heritage Site known for its pristine wilderness, incredible wildlife, and the mighty Zambezi River. Famous for walking safaris and canoeing adventures.',
+    topActivities: [
+      { name: "Canoe Safaris", description: "Navigate the Zambezi River among wildlife", river: "Zambezi River" },
+      { name: "Walking Safaris", description: "Big 5 encounters on foot in pristine wilderness", experience: "No fences" },
+      { name: "Tiger Fishing", description: "Fish for tigerfish and bream in the Zambezi", species: "Tigerfish & bream" }
+    ],
+    uniqueFeatures: [
+      "Pristine wilderness with no fences",
+      "Floodplains photography with elephants",
+      "Four pools formed by the Zambezi River"
+    ],
+    accommodations: {
+      luxury: ["Ruckomechi Camp", "Zambezi Expeditions"],
+      midRange: ["Nyamepi Camp (self-catering)"],
+      budget: ["Wilderness camping"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
+    ]
+  },
+  'eastern-highlands': {
+    name: 'Eastern Highlands',
+    tagline: 'Misty Mountains & Tea Plantations',
+    videoUrl: 'https://player.vimeo.com/external/highlands.hd.mp4',
+    backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+    unesco: false,
+    usp: 'Zimbabwe\'s highest peak and misty rainforests',
+    bestSeason: 'Year-round: April - September ideal',
+    temperature: '10-25°C',
+    description: 'Experience the cool mountain climate, mist-covered peaks, and rolling tea plantations of Zimbabwe\'s Eastern Highlands including Nyanga, Bvumba, and Chimanimani.',
+    topActivities: [
+      { name: "Mount Nyangani Hiking", description: "Climb Zimbabwe's highest peak (2,592m)", elevation: "2,592m" },
+      { name: "Coffee Plantation Tours", description: "Visit coffee farms in the Bvumba Mountains", region: "Bvumba Mountains" },
+      { name: "Mtarazi Falls Visit", description: "Zimbabwe's tallest waterfall", height: "762m" }
+    ],
+    uniqueFeatures: [
+      "Mount Nyangani - Zimbabwe's highest peak",
+      "Mtarazi Falls - tallest waterfall in Zimbabwe",
+      "Misty mountains and rainforests"
+    ],
+    accommodations: {
+      luxury: ["Leopard Rock Hotel"],
+      midRange: ["Frog and Fern, Bvumba"],
+      budget: ["Mountain lodges"]
+    },
+    gallery: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
@@ -69,8 +209,23 @@ const destinations = {
     unesco: true,
     usp: 'Largest concentration of rock art in Southern Africa',
     bestSeason: 'Cool season: April - August',
-    temperature: '15-25°C',
-    description: 'Ancient granite formations and spiritual heritage with thousands of years of rock art and stunning landscapes.',
+    temperature: '12-28°C',
+    description: 'Ancient granite formations and spiritual heritage with thousands of years of rock art. Home to rhino tracking and Cecil Rhodes\' grave.',
+    topActivities: [
+      { name: "Rhino Tracking", description: "Track black and white rhinos on foot", species: "Black & white rhinos" },
+      { name: "Rock Art Tours", description: "Ancient San bushmen paintings", age: "2000+ years old" },
+      { name: "Cecil Rhodes Grave", description: "Visit the grave of the colonial pioneer", historical: "World's View" }
+    ],
+    uniqueFeatures: [
+      "Largest concentration of rock art in Southern Africa",
+      "Ancient granite formations",
+      "Cecil Rhodes' burial site at World's View"
+    ],
+    accommodations: {
+      luxury: ["Amalinda Lodge"],
+      midRange: ["Matobo Hills Lodge"],
+      budget: ["Camp Amalinda"]
+    },
     gallery: [
       'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
@@ -78,63 +233,6 @@ const destinations = {
       'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
-    ]
-  },
-  'mana-pools': {
-    name: 'Mana Pools National Park',
-    tagline: 'Pristine Wilderness Paradise',
-    videoUrl: 'https://player.vimeo.com/external/mana.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=1920&h=1080&fit=crop',
-    unesco: true,
-    usp: 'UNESCO World Heritage Site with pristine wilderness',
-    bestSeason: 'Dry season: May - October',
-    temperature: '20-32°C',
-    description: 'A UNESCO World Heritage Site known for its pristine wilderness, incredible wildlife, and the mighty Zambezi River. Famous for walking safaris and canoeing adventures.',
-    gallery: [
-      'https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
-    ]
-  },
-  'great-zimbabwe': {
-    name: 'Great Zimbabwe',
-    tagline: 'Ancient African Kingdom',
-    videoUrl: 'https://player.vimeo.com/external/ruins.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=1920&h=1080&fit=crop',
-    unesco: true,
-    usp: 'Ancient stone city that gave Zimbabwe its name',
-    bestSeason: 'Cool season: April - August',
-    temperature: '18-28°C',
-    description: 'The ancient stone city that gave Zimbabwe its name. These magnificent ruins represent the largest ancient structure south of the Sahara Desert.',
-    gallery: [
-      'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1517744918058-b52bb5ccdecd?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop'
-    ]
-  },
-  'eastern-highlands': {
-    name: 'Eastern Highlands',
-    tagline: 'Misty Mountains & Tea Plantations',
-    videoUrl: 'https://player.vimeo.com/external/highlands.hd.mp4',
-    backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
-    unesco: false,
-    usp: 'Cool mountain climate and scenic landscapes',
-    bestSeason: 'Year-round: April - September ideal',
-    temperature: '15-25°C',
-    description: 'Experience the cool mountain climate, mist-covered peaks, and rolling tea plantations of Zimbabwe\'s Eastern Highlands.',
-    gallery: [
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=800&h=600&fit=crop'
     ]
   }
 };
@@ -180,29 +278,13 @@ const DestinationPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
       <EnhancedNavigation />
       
-      {/* Hero Section with Video */}
+      {/* Hero Section */}
       <section className="relative h-screen overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${destination.backgroundImage})` }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
-          
-          {/* Particle Effects */}
-          <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-2 h-2 bg-white/30 rounded-full animate-pulse"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`
-                }}
-              />
-            ))}
-          </div>
         </div>
 
         <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4">
@@ -212,7 +294,7 @@ const DestinationPage = () => {
           <p className="text-2xl md:text-3xl text-orange-200 mb-8">{destination.tagline}</p>
           
           {/* Key Facts Panel */}
-          <Card className="bg-black/80 backdrop-blur-xl border border-orange-500/30 p-6 max-w-2xl">
+          <Card className="bg-black/80 backdrop-blur-xl border border-orange-500/30 p-6 max-w-4xl">
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-white">
                 <div className="text-center">
@@ -252,31 +334,22 @@ const DestinationPage = () => {
           <div className="flex space-x-8 overflow-x-auto">
             {[
               { id: 'overview', label: 'Overview' },
+              { id: 'activities', label: 'Top Activities' },
+              { id: 'accommodation', label: 'Hotels & Lodges' },
               { id: 'gallery', label: 'Gallery' },
-              { id: 'hotels', label: 'Hotels', link: `/hotels/${slug}` },
-              { id: 'activities', label: 'Activities', link: `/activities/${slug}` },
-              { id: 'wildlife', label: 'Wildlife', link: '/wildlife' },
-              { id: 'navigation', label: 'Navigation' }
+              { id: 'navigation', label: 'Planning Tools' }
             ].map((tab) => (
-              tab.link ? (
-                <Link key={tab.id} to={tab.link}>
-                  <button className="py-4 px-2 text-sm font-medium whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors">
-                    {tab.label}
-                  </button>
-                </Link>
-              ) : (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`py-4 px-2 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
-                    activeTab === tab.id
-                      ? 'border-orange-500 text-orange-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              )
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`py-4 px-2 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
+                  activeTab === tab.id
+                    ? 'border-orange-500 text-orange-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                {tab.label}
+              </button>
             ))}
           </div>
         </div>
@@ -289,59 +362,156 @@ const DestinationPage = () => {
             <Card>
               <CardContent className="p-8">
                 <h2 className="text-3xl font-bold mb-4">About {destination.name}</h2>
-                <p className="text-lg text-gray-600 leading-relaxed">{destination.description}</p>
+                <p className="text-lg text-gray-600 leading-relaxed mb-6">{destination.description}</p>
                 
-                <div className="mt-6 flex gap-4">
-                  <Link to={`/hotels/${slug}`}>
-                    <Button className="bg-orange-600 hover:bg-orange-700">
-                      View Hotels
-                    </Button>
-                  </Link>
-                  <Link to={`/activities/${slug}`}>
-                    <Button variant="outline" className="border-orange-600 text-orange-600">
-                      Browse Activities
-                    </Button>
-                  </Link>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                      <Award className="h-5 w-5 text-orange-600" />
+                      Unique Features
+                    </h3>
+                    <ul className="space-y-2">
+                      {destination.uniqueFeatures.map((feature, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <Star className="h-4 w-4 text-orange-500 mt-1 flex-shrink-0" />
+                          <span className="text-gray-600">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                      <Activity className="h-5 w-5 text-orange-600" />
+                      Top Activities Preview
+                    </h3>
+                    <ul className="space-y-2">
+                      {destination.topActivities.slice(0, 3).map((activity, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <Mountain className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
+                          <span className="text-gray-600">{activity.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Gallery Preview */}
-            <Card>
-              <CardContent className="p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold">Photo Gallery</h3>
-                  <Button
-                    onClick={() => setShowGallery(true)}
+                
+                <div className="mt-8 flex gap-4">
+                  <Button 
+                    onClick={() => setActiveTab('activities')}
                     className="bg-orange-600 hover:bg-orange-700"
                   >
-                    <Camera className="h-4 w-4 mr-2" />
-                    View All Photos
+                    View All Activities
                   </Button>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                  {destination.gallery.slice(0, 6).map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt={`${destination.name} ${index + 1}`}
-                      className="w-full h-24 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform"
-                      onClick={() => {
-                        setCurrentImage(index);
-                        setShowGallery(true);
-                      }}
-                    />
-                  ))}
+                  <Button 
+                    onClick={() => setActiveTab('accommodation')}
+                    variant="outline" 
+                    className="border-orange-600 text-orange-600"
+                  >
+                    Browse Hotels & Lodges
+                  </Button>
                 </div>
               </CardContent>
             </Card>
           </div>
         )}
 
+        {activeTab === 'activities' && (
+          <div className="space-y-6">
+            <h2 className="text-3xl font-bold mb-6">Top Activities in {destination.name}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {destination.topActivities.map((activity, index) => (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Activity className="h-5 w-5 text-orange-600" />
+                      {activity.name}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600 mb-4">{activity.description}</p>
+                    <div className="space-y-2">
+                      {Object.entries(activity).map(([key, value]) => {
+                        if (key !== 'name' && key !== 'description') {
+                          return (
+                            <Badge key={key} variant="outline" className="mr-2">
+                              {key}: {value}
+                            </Badge>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <ActivitiesDatabase />
+          </div>
+        )}
+
+        {activeTab === 'accommodation' && (
+          <div className="space-y-6">
+            <h2 className="text-3xl font-bold mb-6">Hotels & Lodges in {destination.name}</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="border-yellow-200 bg-yellow-50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-yellow-800">
+                    <Star className="h-5 w-5 fill-yellow-500 text-yellow-500" />
+                    Luxury
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {destination.accommodations.luxury.map((hotel, index) => (
+                      <li key={index} className="text-gray-700">{hotel}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-blue-200 bg-blue-50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-blue-800">
+                    <Users className="h-5 w-5 text-blue-600" />
+                    Mid-Range
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {destination.accommodations.midRange.map((hotel, index) => (
+                      <li key={index} className="text-gray-700">{hotel}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-green-200 bg-green-50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-green-800">
+                    <MapPin className="h-5 w-5 text-green-600" />
+                    Budget
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {destination.accommodations.budget.map((hotel, index) => (
+                      <li key={index} className="text-gray-700">{hotel}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <HotelDiscoverySystem />
+          </div>
+        )}
+
         {activeTab === 'gallery' && (
           <Card>
             <CardContent className="p-8">
-              <h2 className="text-3xl font-bold mb-6">Media Gallery</h2>
+              <h2 className="text-3xl font-bold mb-6">Photo Gallery</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {destination.gallery.map((image, index) => (
                   <div
@@ -367,9 +537,6 @@ const DestinationPage = () => {
           </Card>
         )}
 
-        {activeTab === 'hotels' && <HotelDiscoverySystem />}
-        {activeTab === 'activities' && <ActivitiesDatabase />}
-        {activeTab === 'wildlife' && <WildlifeSpotlight />}
         {activeTab === 'navigation' && <NavigationTools />}
       </div>
 
