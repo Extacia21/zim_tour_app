@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import EnhancedNavigation from '@/components/EnhancedNavigation';
 import EnhancedFooter from '@/components/EnhancedFooter';
+import DynamicHeroSection from '@/components/DynamicHeroSection';
 
 const destinations = [
   {
@@ -183,104 +184,8 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
       <EnhancedNavigation />
       
-      {/* Hero Section with Sparkling Effects */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=1080&fit=crop)'
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
-        </div>
-
-        {/* Sparkling Effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${1 + Math.random() * 2}s`
-              }}
-            >
-              <Sparkles 
-                className="text-yellow-300 opacity-70" 
-                size={Math.random() * 20 + 10}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Floating particles */}
-        <div className="absolute inset-0">
-          {[...Array(30)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white/40 rounded-full animate-bounce"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                animationDuration: `${2 + Math.random() * 3}s`
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 drop-shadow-2xl">
-            Zimbabwe
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">
-              Wanderlust
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Discover the breathtaking beauty and rich culture of Zimbabwe through immersive experiences 
-            and cutting-edge AI technology
-          </p>
-          
-          {/* Quick Stats */}
-          <div className="flex flex-wrap justify-center gap-6 mb-8">
-            <div className="bg-black/60 backdrop-blur-xl rounded-lg px-6 py-3 border border-orange-500/30">
-              <div className="text-2xl font-bold text-orange-400">{destinations.length}</div>
-              <div className="text-white/80 text-sm">Destinations</div>
-            </div>
-            <div className="bg-black/60 backdrop-blur-xl rounded-lg px-6 py-3 border border-orange-500/30">
-              <div className="text-2xl font-bold text-orange-400">4.8</div>
-              <div className="text-white/80 text-sm">Average Rating</div>
-            </div>
-            <div className="bg-black/60 backdrop-blur-xl rounded-lg px-6 py-3 border border-orange-500/30">
-              <div className="text-2xl font-bold text-orange-400">15k+</div>
-              <div className="text-white/80 text-sm">Happy Travelers</div>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 text-lg"
-            >
-              <Plane className="mr-2 h-5 w-5" />
-              Start Your Journey
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="bg-white/10 backdrop-blur-xl border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg"
-            >
-              <Camera className="mr-2 h-5 w-5" />
-              Virtual Tour
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Replace static hero with DynamicHeroSection */}
+      <DynamicHeroSection />
 
       {/* Featured Experiences */}
       <section className="py-16 px-4">
