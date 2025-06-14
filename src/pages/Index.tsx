@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Star, Calendar, Users, ArrowRight, Sparkles, Eye } from "lucide-react";
+import { Search, MapPin, Star, Calendar, Users, ArrowRight, Sparkles, Eye, Binoculars } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import AITravelConcierge from "@/components/AITravelConcierge";
 import SafetyToolkit from "@/components/SafetyToolkit";
@@ -12,6 +12,9 @@ import DynamicHeroSection from "@/components/DynamicHeroSection";
 import HotelDiscoverySystem from "@/components/HotelDiscoverySystem";
 import NavigationHeader from "@/components/NavigationHeader";
 import EnhancedFooter from "@/components/EnhancedFooter";
+import SafariRoutesExplorer from "@/components/SafariRoutesExplorer";
+import SeasonalPlanner from "@/components/SeasonalPlanner";
+import CulturalPreparation from "@/components/CulturalPreparation";
 
 const destinations = [
   {
@@ -87,7 +90,7 @@ const categories = ["All", "Natural Wonder", "Historical", "Wildlife", "Adventur
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeSection, setActiveSection] = useState<'explore' | 'booking' | 'globe' | 'hotels'>('explore');
+  const [activeSection, setActiveSection] = useState<'explore' | 'booking' | 'globe' | 'hotels' | 'safari' | 'seasonal' | 'culture'>('explore');
 
   const filteredDestinations = destinations.filter(dest => {
     const matchesCategory = selectedCategory === "All" || dest.category === selectedCategory;
@@ -142,6 +145,9 @@ const Index = () => {
                 { id: 'explore', label: 'Explore Destinations', icon: Search },
                 { id: 'globe', label: '3D Globe View', icon: MapPin },
                 { id: 'hotels', label: 'Find Hotels', icon: Eye },
+                { id: 'safari', label: 'Safari Routes', icon: Binoculars },
+                { id: 'seasonal', label: 'Seasonal Guide', icon: Calendar },
+                { id: 'culture', label: 'Cultural Prep', icon: Users },
                 { id: 'booking', label: 'Book Experiences', icon: Calendar }
               ].map((tab) => (
                 <Button
@@ -171,6 +177,15 @@ const Index = () => {
 
         {/* Hotel Discovery Section */}
         {activeSection === 'hotels' && <HotelDiscoverySystem />}
+
+        {/* Safari Routes Section */}
+        {activeSection === 'safari' && <SafariRoutesExplorer />}
+
+        {/* Seasonal Planning Section */}
+        {activeSection === 'seasonal' && <SeasonalPlanner />}
+
+        {/* Cultural Preparation Section */}
+        {activeSection === 'culture' && <CulturalPreparation />}
 
         {/* Booking Engine Section */}
         {activeSection === 'booking' && <BookingEngine />}
