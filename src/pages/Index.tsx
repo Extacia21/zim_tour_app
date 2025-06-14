@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -179,6 +178,9 @@ const Index = () => {
               >
                 Destinations
               </button>
+              <Link to="/wildlife" className="text-gray-700 hover:text-orange-600 transition-colors">
+                Wildlife
+              </Link>
               <button 
                 onClick={() => scrollToSection('features')}
                 className="text-gray-700 hover:text-orange-600 transition-colors cursor-pointer"
@@ -228,15 +230,16 @@ const Index = () => {
               <Binoculars className="h-5 w-5 mr-2" />
               Explore Destinations
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              onClick={() => scrollToSection('culture')}
-              className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8 py-4 text-lg"
-            >
-              <Users className="h-5 w-5 mr-2" />
-              Cultural Experiences
-            </Button>
+            <Link to="/wildlife">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8 py-4 text-lg w-full"
+              >
+                <Users className="h-5 w-5 mr-2" />
+                Discover Wildlife
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -369,7 +372,7 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-4">
                   <div className="text-orange-600 font-bold text-lg">{destination.price}</div>
                   <div className="flex gap-2">
                     <Link to={`/destination/${destination.slug}`}>
@@ -390,6 +393,20 @@ const Index = () => {
                       Book Now
                     </Button>
                   </div>
+                </div>
+              
+                {/* Quick Links */}
+                <div className="flex gap-1 pt-2 border-t">
+                  <Link to={`/hotels/${destination.slug}`}>
+                    <Button size="sm" variant="outline" className="flex-1 text-xs">
+                      Hotels
+                    </Button>
+                  </Link>
+                  <Link to={`/activities/${destination.slug}`}>
+                    <Button size="sm" variant="outline" className="flex-1 text-xs">
+                      Activities
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>

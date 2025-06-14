@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -179,22 +178,30 @@ const DestinationPage = () => {
             {[
               { id: 'overview', label: 'Overview' },
               { id: 'gallery', label: 'Gallery' },
-              { id: 'hotels', label: 'Hotels' },
-              { id: 'activities', label: 'Activities' },
-              { id: 'wildlife', label: 'Wildlife' },
+              { id: 'hotels', label: 'Hotels', link: `/hotels/${slug}` },
+              { id: 'activities', label: 'Activities', link: `/activities/${slug}` },
+              { id: 'wildlife', label: 'Wildlife', link: '/wildlife' },
               { id: 'navigation', label: 'Navigation' }
             ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`py-4 px-2 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
-                  activeTab === tab.id
-                    ? 'border-orange-500 text-orange-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                {tab.label}
-              </button>
+              tab.link ? (
+                <Link key={tab.id} to={tab.link}>
+                  <button className="py-4 px-2 text-sm font-medium whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors">
+                    {tab.label}
+                  </button>
+                </Link>
+              ) : (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`py-4 px-2 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
+                    activeTab === tab.id
+                      ? 'border-orange-500 text-orange-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              )
             ))}
           </div>
         </div>
@@ -208,6 +215,19 @@ const DestinationPage = () => {
               <CardContent className="p-8">
                 <h2 className="text-3xl font-bold mb-4">About {destination.name}</h2>
                 <p className="text-lg text-gray-600 leading-relaxed">{destination.description}</p>
+                
+                <div className="mt-6 flex gap-4">
+                  <Link to={`/hotels/${slug}`}>
+                    <Button className="bg-orange-600 hover:bg-orange-700">
+                      View Hotels
+                    </Button>
+                  </Link>
+                  <Link to={`/activities/${slug}`}>
+                    <Button variant="outline" className="border-orange-600 text-orange-600">
+                      Browse Activities
+                    </Button>
+                  </Link>
+                </div>
               </CardContent>
             </Card>
 
