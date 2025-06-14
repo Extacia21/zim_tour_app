@@ -15,7 +15,8 @@ import {
   Clock,
   DollarSign,
   Users,
-  Map
+  Map,
+  Camera
 } from 'lucide-react';
 
 interface Route {
