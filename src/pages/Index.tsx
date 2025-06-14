@@ -1,20 +1,22 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Star, Calendar, Users, ArrowRight, Sparkles, Eye, Binoculars } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import AITravelConcierge from "@/components/AITravelConcierge";
-import SafetyToolkit from "@/components/SafetyToolkit";
-import Interactive3DGlobe from "@/components/Interactive3DGlobe";
-import BookingEngine from "@/components/BookingEngine";
-import DynamicHeroSection from "@/components/DynamicHeroSection";
-import HotelDiscoverySystem from "@/components/HotelDiscoverySystem";
-import NavigationHeader from "@/components/NavigationHeader";
-import EnhancedFooter from "@/components/EnhancedFooter";
-import SafariRoutesExplorer from "@/components/SafariRoutesExplorer";
-import SeasonalPlanner from "@/components/SeasonalPlanner";
-import CulturalPreparation from "@/components/CulturalPreparation";
+import { 
+  Search, 
+  MapPin, 
+  Star, 
+  Calendar, 
+  Users, 
+  Camera,
+  Phone,
+  Mail,
+  Globe,
+  Clock,
+  Heart
+} from "lucide-react";
 
 const destinations = [
   {
@@ -26,7 +28,8 @@ const destinations = [
     image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=600&fit=crop",
     description: "One of the Seven Natural Wonders of the World",
     category: "Natural Wonder",
-    activities: ["Helicopter Tours", "Bungee Jumping", "River Rafting"]
+    price: "$250",
+    duration: "Full Day"
   },
   {
     id: 2,
@@ -37,7 +40,8 @@ const destinations = [
     image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=600&fit=crop",
     description: "Ancient city ruins and UNESCO World Heritage Site",
     category: "Historical",
-    activities: ["Guided Tours", "Archaeological Walks", "Cultural Shows"]
+    price: "$120",
+    duration: "Half Day"
   },
   {
     id: 3,
@@ -48,7 +52,8 @@ const destinations = [
     image: "https://images.unsplash.com/photo-1549366021-9f761d040dd2?w=800&h=600&fit=crop",
     description: "Largest national park with diverse wildlife",
     category: "Wildlife",
-    activities: ["Game Drives", "Walking Safaris", "Bird Watching"]
+    price: "$180",
+    duration: "2 Days"
   },
   {
     id: 4,
@@ -59,38 +64,16 @@ const destinations = [
     image: "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=800&h=600&fit=crop",
     description: "UNESCO site known for canoeing and wildlife",
     category: "Adventure",
-    activities: ["Canoeing", "Walking Safaris", "Fishing"]
-  },
-  {
-    id: 5,
-    name: "Eastern Highlands",
-    location: "Manicaland Province",
-    rating: 4.6,
-    reviews: 756,
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
-    description: "Mountain ranges with cool climate and scenic beauty",
-    category: "Mountains",
-    activities: ["Hiking", "Tea Plantations", "Scenic Drives"]
-  },
-  {
-    id: 6,
-    name: "Lake Kariba",
-    location: "Northern Zimbabwe",
-    rating: 4.5,
-    reviews: 632,
-    image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=600&fit=crop",
-    description: "Largest artificial lake in the world by volume",
-    category: "Water Sports",
-    activities: ["Boat Cruises", "Fishing", "Houseboat Stays"]
+    price: "$320",
+    duration: "3 Days"
   }
 ];
 
-const categories = ["All", "Natural Wonder", "Historical", "Wildlife", "Adventure", "Mountains", "Water Sports"];
+const categories = ["All", "Natural Wonder", "Historical", "Wildlife", "Adventure"];
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeSection, setActiveSection] = useState<'explore' | 'booking' | 'globe' | 'hotels' | 'safari' | 'seasonal' | 'culture'>('explore');
 
   const filteredDestinations = destinations.filter(dest => {
     const matchesCategory = selectedCategory === "All" || dest.category === selectedCategory;
@@ -100,235 +83,212 @@ const Index = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
-      {/* Navigation Header */}
-      <NavigationHeader />
-
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-orange-500/30 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Safety Toolkit & AI Concierge (Fixed Position) */}
-      <SafetyToolkit />
-      <AITravelConcierge />
-
-      {/* Dynamic Hero Section */}
-      <DynamicHeroSection />
-
-      {/* Breadcrumb Navigation */}
-      <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-        <nav className="flex items-center space-x-2 text-sm">
-          <a href="#" className="text-orange-400 hover:text-orange-300">Home</a>
-          <span className="text-gray-500">/</span>
-          <span className="text-gray-300">Destinations</span>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800">
+      {/* Header */}
+      <header className="bg-black/95 backdrop-blur-xl border-b border-orange-500/30 sticky top-0 z-50">
+        <div className="h-1 bg-gradient-to-r from-green-500 via-yellow-400 via-red-500 to-green-500"></div>
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-3">
+              <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+                Zimbabwe Wanderlust
+              </div>
+            </div>
+            
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#destinations" className="text-gray-300 hover:text-orange-400 transition-colors">Destinations</a>
+              <a href="#tours" className="text-gray-300 hover:text-orange-400 transition-colors">Tours</a>
+              <a href="#hotels" className="text-gray-300 hover:text-orange-400 transition-colors">Hotels</a>
+              <a href="#contact" className="text-gray-300 hover:text-orange-400 transition-colors">Contact</a>
+            </div>
+            
+            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
+              Book Now
+            </Button>
+          </div>
         </nav>
-      </div>
+      </header>
 
-      {/* Navigation Tabs */}
-      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="flex justify-center mb-8">
-          <div className="bg-black/90 backdrop-blur-xl rounded-2xl p-2 border border-orange-500/30">
+      {/* Hero Section */}
+      <section className="relative py-20 px-4 text-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-900/50 to-red-900/50"></div>
+        <div className="relative max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            Discover
+            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent"> Zimbabwe</span>
+          </h1>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Experience the natural wonders, rich culture, and incredible wildlife of Zimbabwe with our expertly crafted tours
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 text-lg">
+              Explore Destinations
+            </Button>
+            <Button size="lg" variant="outline" className="border-orange-400 text-orange-400 hover:bg-orange-400/10 px-8 py-4 text-lg">
+              View Tours
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Search and Filter Section */}
+      <section id="destinations" className="max-w-7xl mx-auto px-4 py-16">
+        <div className="bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-orange-500/30 mb-8">
+          <div className="flex flex-col lg:flex-row gap-4 items-center">
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-3 h-5 w-5 text-orange-400" />
+              <Input
+                placeholder="Search destinations..."
+                className="pl-10 h-12 text-lg bg-gray-800/50 border-orange-500/30 text-white placeholder:text-gray-400 focus:border-orange-500"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
             <div className="flex gap-2 flex-wrap">
-              {[
-                { id: 'explore', label: 'Explore Destinations', icon: Search },
-                { id: 'globe', label: '3D Globe View', icon: MapPin },
-                { id: 'hotels', label: 'Find Hotels', icon: Eye },
-                { id: 'safari', label: 'Safari Routes', icon: Binoculars },
-                { id: 'seasonal', label: 'Seasonal Guide', icon: Calendar },
-                { id: 'culture', label: 'Cultural Prep', icon: Users },
-                { id: 'booking', label: 'Book Experiences', icon: Calendar }
-              ].map((tab) => (
+              {categories.map((category) => (
                 <Button
-                  key={tab.id}
-                  onClick={() => setActiveSection(tab.id as any)}
-                  variant={activeSection === tab.id ? 'default' : 'ghost'}
-                  className={`px-6 py-3 ${
-                    activeSection === tab.id
-                      ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
-                      : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
-                  }`}
+                  key={category}
+                  variant={selectedCategory === category ? "default" : "outline"}
+                  onClick={() => setSelectedCategory(category)}
+                  className={selectedCategory === category 
+                    ? "bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700" 
+                    : "border-orange-500/30 text-orange-400 hover:bg-orange-500/20"
+                  }
                 >
-                  <tab.icon className="h-4 w-4 mr-2" />
-                  {tab.label}
+                  {category}
                 </Button>
               ))}
             </div>
           </div>
         </div>
 
-        {/* 3D Globe Section */}
-        {activeSection === 'globe' && (
-          <div className="flex justify-center mb-8">
-            <Interactive3DGlobe />
-          </div>
-        )}
-
-        {/* Hotel Discovery Section */}
-        {activeSection === 'hotels' && <HotelDiscoverySystem />}
-
-        {/* Safari Routes Section */}
-        {activeSection === 'safari' && <SafariRoutesExplorer />}
-
-        {/* Seasonal Planning Section */}
-        {activeSection === 'seasonal' && <SeasonalPlanner />}
-
-        {/* Cultural Preparation Section */}
-        {activeSection === 'culture' && <CulturalPreparation />}
-
-        {/* Booking Engine Section */}
-        {activeSection === 'booking' && <BookingEngine />}
-
-        {/* Explore Destinations Section */}
-        {activeSection === 'explore' && (
-          <>
-            {/* Search and Filter Section */}
-            <div className="bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl p-6 -mt-10 relative z-10 border border-orange-500/30 mb-8">
-              <div className="flex flex-col lg:flex-row gap-4 items-center">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-3 h-5 w-5 text-orange-400" />
-                  <Input
-                    placeholder="Search destinations, experiences, adventures..."
-                    className="pl-10 h-12 text-lg bg-gray-800/50 border-orange-500/30 text-white placeholder:text-gray-400 focus:border-orange-500 focus:ring-orange-500/50"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
+        {/* Destinations Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredDestinations.map((destination) => (
+            <Card 
+              key={destination.id} 
+              className="group overflow-hidden border-0 shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 hover:scale-105 bg-black/90 backdrop-blur-xl border border-orange-500/20 hover:border-orange-500/50"
+            >
+              <div className="relative overflow-hidden">
+                <img
+                  src={destination.image}
+                  alt={destination.name}
+                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div className="absolute top-3 left-3">
+                  <Badge className="bg-gradient-to-r from-orange-600 to-red-600 text-white">
+                    {destination.category}
+                  </Badge>
                 </div>
-                <div className="flex gap-2 flex-wrap">
-                  {categories.map((category) => (
-                    <Button
-                      key={category}
-                      variant={selectedCategory === category ? "default" : "outline"}
-                      onClick={() => setSelectedCategory(category)}
-                      className={selectedCategory === category 
-                        ? "bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 shadow-lg" 
-                        : "border-orange-500/30 text-orange-400 hover:bg-orange-500/20 backdrop-blur-sm"
-                      }
-                    >
-                      {category}
-                    </Button>
-                  ))}
+                <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
+                  <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                  <span className="text-xs font-semibold text-white">{destination.rating}</span>
                 </div>
+                <button className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm rounded-full p-2 text-white hover:bg-orange-500/80 transition-colors">
+                  <Heart className="h-4 w-4" />
+                </button>
               </div>
-            </div>
-
-            {/* Destinations Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredDestinations.map((destination, index) => (
-                <Card 
-                  key={destination.id} 
-                  className="group overflow-hidden border-0 shadow-2xl hover:shadow-orange-500/25 transition-all duration-700 hover:scale-105 bg-black/90 backdrop-blur-xl border border-orange-500/20 hover:border-orange-500/50"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={destination.image}
-                      alt={destination.name}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg">
-                        {destination.category}
-                      </Badge>
-                    </div>
-                    <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1 border border-orange-500/30">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-semibold text-white">{destination.rating}</span>
-                    </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-2xl font-bold text-white mb-1">{destination.name}</h3>
-                      <div className="flex items-center text-orange-300">
-                        <MapPin className="h-4 w-4 mr-1" />
-                        <span className="text-sm">{destination.location}</span>
-                      </div>
-                    </div>
+              
+              <CardContent className="p-4">
+                <h3 className="text-lg font-bold text-white mb-1">{destination.name}</h3>
+                <div className="flex items-center text-orange-300 mb-2">
+                  <MapPin className="h-3 w-3 mr-1" />
+                  <span className="text-xs">{destination.location}</span>
+                </div>
+                <p className="text-gray-300 text-xs mb-3 line-clamp-2">{destination.description}</p>
+                
+                <div className="flex items-center justify-between text-xs text-gray-400 mb-3">
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    <span>{destination.duration}</span>
                   </div>
-                  
-                  <CardContent className="p-6 bg-gradient-to-b from-gray-900 to-black">
-                    <div className="space-y-4">
-                      <p className="text-gray-300 text-sm leading-relaxed">{destination.description}</p>
-                      
-                      <div className="flex items-center gap-4 text-sm text-gray-400">
-                        <div className="flex items-center gap-1">
-                          <Users className="h-4 w-4" />
-                          <span>{destination.reviews} reviews</span>
-                        </div>
-                      </div>
+                  <div className="flex items-center gap-1">
+                    <Users className="h-3 w-3" />
+                    <span>{destination.reviews} reviews</span>
+                  </div>
+                </div>
 
-                      <div className="space-y-2">
-                        <h4 className="font-semibold text-orange-300">Popular Activities:</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {destination.activities.map((activity, idx) => (
-                            <Badge key={idx} variant="secondary" className="text-xs bg-orange-500/20 text-orange-300 border border-orange-500/30">
-                              {activity}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-orange-400 font-bold">{destination.price}</div>
+                  <Button size="sm" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700">
+                    Book Now
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
 
-                      <div className="flex gap-2 pt-2">
-                        <Button className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 shadow-lg">
-                          Explore in AR
-                        </Button>
-                        <Button variant="outline" className="border-orange-500/30 text-orange-400 hover:bg-orange-500/20">
-                          <Calendar className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* Enhanced Call to Action */}
-      <div className="bg-gradient-to-r from-orange-900 via-red-900 to-pink-900 text-white py-20 mt-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=1920&h=600&fit=crop')] bg-cover bg-center opacity-20"></div>
-        <div className="relative max-w-4xl mx-auto text-center px-4">
-          <Sparkles className="h-12 w-12 text-yellow-400 mx-auto mb-6 animate-pulse" />
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
-            Ready for Your AI-Powered Zimbabwe Adventure?
-          </h2>
-          <p className="text-xl mb-8 text-orange-100 max-w-2xl mx-auto">
-            Join thousands of travelers discovering Zimbabwe through cutting-edge AR experiences, AI-guided tours, and seamless booking
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 px-8 py-4 text-lg font-semibold text-black shadow-2xl hover:scale-105 transition-all duration-300"
-            >
-              <Sparkles className="h-5 w-5 mr-2" />
-              Download AI Travel App
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-2 border-orange-400 text-orange-400 hover:bg-orange-400/10 px-8 py-4 text-lg font-semibold backdrop-blur-sm hover:scale-105 transition-all duration-300"
-            >
-              Contact AR Guide
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Button>
+      {/* Features Section */}
+      <section className="bg-gradient-to-r from-orange-900/20 to-red-900/20 py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">Why Choose Zimbabwe Wanderlust?</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              We provide authentic, expertly guided experiences that showcase the best of Zimbabwe
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center">
+              <Camera className="h-12 w-12 text-orange-400 mx-auto mb-4" />
+              <h3 className="text-white font-bold mb-2">Expert Photography</h3>
+              <p className="text-gray-300 text-sm">Capture stunning memories with our professional photography services</p>
+            </Card>
+            
+            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center">
+              <Users className="h-12 w-12 text-orange-400 mx-auto mb-4" />
+              <h3 className="text-white font-bold mb-2">Local Guides</h3>
+              <p className="text-gray-300 text-sm">Learn from passionate locals who know every hidden gem</p>
+            </Card>
+            
+            <Card className="bg-black/90 backdrop-blur-xl border border-orange-500/20 p-6 text-center">
+              <Star className="h-12 w-12 text-orange-400 mx-auto mb-4" />
+              <h3 className="text-white font-bold mb-2">5-Star Service</h3>
+              <p className="text-gray-300 text-sm">Luxury accommodations and premium service throughout your journey</p>
+            </Card>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Enhanced Footer */}
-      <EnhancedFooter />
+      {/* Contact Section */}
+      <section id="contact" className="py-16">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-white mb-8">Ready to Start Your Adventure?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="flex items-center justify-center gap-3 text-gray-300">
+              <Phone className="h-5 w-5 text-orange-400" />
+              <span>+263 4 123 456</span>
+            </div>
+            <div className="flex items-center justify-center gap-3 text-gray-300">
+              <Mail className="h-5 w-5 text-orange-400" />
+              <span>info@zimwanderlust.com</span>
+            </div>
+            <div className="flex items-center justify-center gap-3 text-gray-300">
+              <Globe className="h-5 w-5 text-orange-400" />
+              <span>Zimbabwe</span>
+            </div>
+          </div>
+          <Button size="lg" className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 text-lg">
+            <Calendar className="h-5 w-5 mr-2" />
+            Plan Your Trip
+          </Button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black border-t border-orange-500/30 py-8">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent mb-4">
+            Zimbabwe Wanderlust
+          </div>
+          <p className="text-gray-400 text-sm">
+            © 2024 Zimbabwe Wanderlust. All rights reserved. Experience the magic of Zimbabwe.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
